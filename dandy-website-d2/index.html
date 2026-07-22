@@ -1067,10 +1067,10 @@ onSee(laneTicks,()=>{
   const num=document.getElementById('moneyNum');
   const lines=[...document.querySelectorAll('.rline')];
   onSee(stage,()=>{
-    lines.forEach((l,i)=>setTimeout(()=>l.classList.add('on'), 400+i*340));
-    const startTally=400+lines.length*340+250;
+    lines.forEach((l,i)=>setTimeout(()=>l.classList.add('on'), 250+i*240));
+    const startTally=250+lines.length*240+150;
     setTimeout(()=>{
-      const target=836, dur=1400, t0=performance.now();
+      const target=836, dur=1000, t0=performance.now();
       const ease=x=>1-Math.pow(1-x,3);
       const raf=window.requestAnimationFrame||((f)=>setTimeout(()=>f(performance.now()),16));
       (function tick(now){
@@ -1081,13 +1081,19 @@ onSee(laneTicks,()=>{
           num.style.transition='transform .25s cubic-bezier(.3,1.5,.5,1)';
           num.style.display='inline-block';
           num.style.transform='scale(1.08)'; setTimeout(()=>num.style.transform='',260);
-          setTimeout(()=>document.getElementById('moneyStrike').classList.add('on'),650);
-          setTimeout(()=>{document.getElementById('moneySub').style.opacity='.65';},1000);
-          setTimeout(()=>document.getElementById('dandyCard').classList.add('on'),1300);
+          setTimeout(()=>document.getElementById('moneyStrike').classList.add('on'),400);
+          setTimeout(()=>{document.getElementById('moneySub').style.opacity='.65';},650);
+          setTimeout(()=>document.getElementById('dandyCard').classList.add('on'),900);
         }
       })(t0);
     },startTally);
   },{threshold:.4});
+  // Fast-scroll guarantee: the card never waits on the full receipt sequence.
+  const card=document.getElementById('dandyCard');
+  onSee(card,()=>{setTimeout(()=>{
+    card.classList.add('on');
+    document.getElementById('moneySub').style.opacity='.65';
+  },350);},{threshold:.5});
 })();
 
 /* ── Sparkle burst (brand confetti) ── */
