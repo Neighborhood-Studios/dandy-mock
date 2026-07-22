@@ -579,7 +579,7 @@ nav.scrolled .bar{padding:13px 24px}
         <!-- floating in-app moments over the real photo -->
         <div class="chipf" style="top:7%;left:-5%;animation-delay:.3s">
           <div class="ic" style="background:#E9F7EE">✓</div>
-          <div><div class="t1">Water heater — flushed</div><div class="t2">Routine care, handled</div></div>
+          <div><div class="t1">New faucet — installed</div><div class="t2">Small or large tasks</div></div>
         </div>
         <div class="chipf" style="bottom:22%;right:-5%;animation-delay:1.4s">
           <div class="ic" style="background:var(--pink-light)">⏳</div>
@@ -596,7 +596,7 @@ nav.scrolled .bar{padding:13px 24px}
   <!-- the little-tasks ticker (from the services catalog) -->
   <div class="marquee" id="mq">
     <div class="mq-clip" aria-hidden="true">
-    <div class="track" id="mqTrack"><span>fix the sticky door</span><span class="sep">✦</span><span>swap the HVAC filter</span><span class="sep">✦</span><span>hang the gallery wall</span><span class="sep">✦</span><span>silence the squeaky hinge</span><span class="sep">✦</span><span>caulk the tub</span><span class="sep">✦</span><span>test the smoke detectors</span><span class="sep">✦</span><span>mount the TV</span><span class="sep">✦</span><span>fix the leaky faucet</span><span class="sep">✦</span><span>clear the dryer vent</span><span class="sep">✦</span><span>touch up the paint</span><span class="sep">✦</span><span>seal the drafty window</span><span class="sep">✦</span><span>assemble the bookshelf</span><span class="sep">✦</span><span>fix the sticky door</span><span class="sep">✦</span><span>swap the HVAC filter</span><span class="sep">✦</span><span>hang the gallery wall</span><span class="sep">✦</span><span>silence the squeaky hinge</span><span class="sep">✦</span><span>caulk the tub</span><span class="sep">✦</span><span>test the smoke detectors</span><span class="sep">✦</span><span>mount the TV</span><span class="sep">✦</span><span>fix the leaky faucet</span><span class="sep">✦</span><span>clear the dryer vent</span><span class="sep">✦</span><span>touch up the paint</span><span class="sep">✦</span><span>seal the drafty window</span><span class="sep">✦</span><span>assemble the bookshelf</span><span class="sep">✦</span></div>
+    <div class="track" id="mqTrack"><span>Fix the sticky door</span><span class="sep">✦</span><span>Swap the HVAC filter</span><span class="sep">✦</span><span>Hang the gallery wall</span><span class="sep">✦</span><span>Silence the squeaky hinge</span><span class="sep">✦</span><span>Caulk the tub</span><span class="sep">✦</span><span>Test the smoke detectors</span><span class="sep">✦</span><span>Mount the TV</span><span class="sep">✦</span><span>Fix the leaky faucet</span><span class="sep">✦</span><span>Clear the dryer vent</span><span class="sep">✦</span><span>Touch up the paint</span><span class="sep">✦</span><span>Seal the drafty window</span><span class="sep">✦</span><span>Assemble the bookshelf</span><span class="sep">✦</span><span>Fix the sticky door</span><span class="sep">✦</span><span>Swap the HVAC filter</span><span class="sep">✦</span><span>Hang the gallery wall</span><span class="sep">✦</span><span>Silence the squeaky hinge</span><span class="sep">✦</span><span>Caulk the tub</span><span class="sep">✦</span><span>Test the smoke detectors</span><span class="sep">✦</span><span>Mount the TV</span><span class="sep">✦</span><span>Fix the leaky faucet</span><span class="sep">✦</span><span>Clear the dryer vent</span><span class="sep">✦</span><span>Touch up the paint</span><span class="sep">✦</span><span>Seal the drafty window</span><span class="sep">✦</span><span>Assemble the bookshelf</span><span class="sep">✦</span></div>
     </div>
   </div>
 </header>
@@ -1027,14 +1027,17 @@ onSee(laneTicks,()=>{
   const box=document.getElementById('vdShort');
   if(!box) return;
   onSee(box,()=>{
+    const prep=box.querySelector('.vd-prep');
     const rows=[...box.querySelectorAll('.vd-row')], fin=box.querySelector('.vd-fin');
     const run=()=>{
-      rows.forEach(r=>r.classList.remove('on','done')); fin.classList.remove('on');
+      prep.classList.remove('on'); fin.classList.remove('on');
+      rows.forEach(r=>r.classList.remove('on','done'));
+      setTimeout(()=>prep.classList.add('on'), 350);
       rows.forEach((r,i)=>{
-        setTimeout(()=>r.classList.add('on'), 400+i*500);
-        setTimeout(()=>r.classList.add('done'), 900+i*700);
+        setTimeout(()=>r.classList.add('on'), 1000+i*450);
+        setTimeout(()=>r.classList.add('done'), 1400+i*600);
       });
-      setTimeout(()=>fin.classList.add('on'), 2600);
+      setTimeout(()=>fin.classList.add('on'), 1400+rows.length*600+300);
     };
     run(); setInterval(run, 10000);
   },{threshold:.4});
