@@ -2,7 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#003953">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1101244721912216');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1101244721912216&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <title>Dandy — Your neighborhood handyman, on subscription</title>
 <meta name="description" content="Dandy pairs your home with one dedicated neighborhood handyman. $149/month for 1.5 hours of handyman work a month — monthly or quarterly, your call — plus routine maintenance on autopilot.">
 <meta property="og:title" content="Dandy — Your neighborhood handyman, on subscription">
@@ -961,7 +979,7 @@ nav.scrolled .bar{padding:13px 24px}
         <p>Atlanta, Georgia</p>
       </div>
     </div>
-    <p style="margin-top:44px;font-size:12px;opacity:.6">© 2026 Dandy · <a href="https://www.hidandy.com/privacy-policy">Privacy</a> · <a href="https://www.hidandy.com/terms-of-service">Terms</a> · 30-day Dandy Guarantee on every visit</p>
+    <p style="margin-top:44px;font-size:12px;opacity:.6">© 2026 Dandy · <a href="https://www.hidandy.com/privacy-policy">Privacy</a> · <a href="terms-of-service.html">Terms</a> · 30-day Dandy Guarantee on every visit</p>
   </div>
 </footer>
 
@@ -1113,8 +1131,89 @@ function burst(el){
   });
 }
 
-/* ── Waitlist submit: validate → confirm with a burst.
-   TODO(launch): POST email+zip to your endpoint inside the success branch. ── */
+/* ══════════════════════════════════════════════════════════════════
+   WAITLIST → MAILCHIMP + HUBSPOT (no backend needed)
+   Fill in the four values below, and every submission is pushed to
+   both platforms directly from the browser.
+
+   ── HUBSPOT ──
+   1. In HubSpot: Marketing → Forms → create a form with fields
+      "email" and "zip" (zip = single-line text, internal name "zip").
+   2. Click Embed → in the embed code you'll see portalId and formId.
+      Paste them below.
+
+   ── MAILCHIMP ──
+   1. In Mailchimp: Audience → Signup forms → Embedded forms.
+   2. Copy the <form action="..."> URL — it looks like
+      https://XXXX.usNN.list-manage.com/subscribe/post?u=…&id=…
+      Paste it as actionUrl below.
+   3. (For ZIP) Audience → Settings → Audience fields & *|MERGE|* tags →
+      add a text field tagged ZIP, then set zipFieldName below to the
+      input name from the embedded form (usually "MERGE2" — check the
+      embed code; the honeypot bXXXX_YYYY value comes from there too).
+
+   Until these are filled in, submissions show the success state and
+   log to the console — nothing is sent.
+   ═════════════════════════════════════════════════════════════════ */
+const WAITLIST = {
+  /* ── PRIMARY: Zapier Catch Hook ──
+     Duplicate the existing Zap, replace the Webflow trigger with
+     "Webhooks by Zapier → Catch Hook", and paste the hook URL here
+     (https://hooks.zapier.com/hooks/catch/…). The form then sends
+     { email, zip, dateSubmitted, source, pageUri } and ALL existing
+     downstream logic — zip service-area filter, Mailchimp ZIPCODE
+     merge + per-path tags, HubSpot upsert, GMass emails, the
+     dateSubmitted condition — keeps working exactly as it does today.
+     When this is set, the direct pushes below are skipped
+     automatically to avoid double-adding contacts. */
+  zapierWebhookUrl: 'YOUR_ZAPIER_CATCH_HOOK_URL',
+  /* ── FALLBACK: direct pushes (no Zapier logic — no zip filtering,
+     tags, or emails). Only used if the webhook above is not set. ── */
+  hubspot:  { portalId: 'YOUR_PORTAL_ID', formGuid: 'YOUR_FORM_GUID' },
+  mailchimp:{ actionUrl: 'YOUR_MAILCHIMP_FORM_ACTION_URL',
+              zipFieldName: 'MERGE2',
+              honeypotName: '' /* e.g. 'b_1a2b3c_9z8y7x' from the embed code */ }
+};
+
+function wlPush(email, zip){
+  const configured = v => v && !/^YOUR_/.test(v);
+  // Zapier Catch Hook — mirrors the old Webflow → Zapier payload.
+  // no-cors POST: hooks.zapier.com accepts and parses the JSON body;
+  // the opaque response is expected (fire-and-forget).
+  if(configured(WAITLIST.zapierWebhookUrl)){
+    fetch(WAITLIST.zapierWebhookUrl,{
+      method:'POST', mode:'no-cors',
+      body:JSON.stringify({
+        email:email,
+        zip:zip,
+        dateSubmitted:new Date().toISOString(),
+        source:'dandy-website',
+        pageUri:location.href
+      })
+    }).catch(err=>console.warn('Zapier push failed:',err));
+    return; // Zapier owns Mailchimp + HubSpot — skip direct pushes
+  }
+  // HubSpot Forms API v3 — CORS-enabled JSON endpoint, no auth needed
+  if(configured(WAITLIST.hubspot.portalId) && configured(WAITLIST.hubspot.formGuid)){
+    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${WAITLIST.hubspot.portalId}/${WAITLIST.hubspot.formGuid}`,{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        fields:[{name:'email',value:email},{name:'zip',value:zip}],
+        context:{pageUri:location.href, pageName:document.title}
+      })
+    }).catch(err=>console.warn('HubSpot push failed:',err));
+  } else { console.info('[waitlist] HubSpot not configured — skipped.'); }
+  // Mailchimp embedded-form POST — fire-and-forget (opaque no-cors response)
+  if(configured(WAITLIST.mailchimp.actionUrl)){
+    const fd=new FormData();
+    fd.append('EMAIL',email);
+    if(WAITLIST.mailchimp.zipFieldName) fd.append(WAITLIST.mailchimp.zipFieldName,zip);
+    if(WAITLIST.mailchimp.honeypotName) fd.append(WAITLIST.mailchimp.honeypotName,'');
+    fetch(WAITLIST.mailchimp.actionUrl,{method:'POST',mode:'no-cors',body:fd})
+      .catch(err=>console.warn('Mailchimp push failed:',err));
+  } else { console.info('[waitlist] Mailchimp not configured — skipped.'); }
+}
+
 function wlSubmit(e){
   e.preventDefault();
   const em=document.getElementById('wlEmail'), zip=document.getElementById('wlZip'),
@@ -1124,7 +1223,7 @@ function wlSubmit(e){
   const zipOk=/^\d{5}$/.test(zip.value.trim());
   if(!emOk){em.classList.add('err');err.textContent='That email doesn\u2019t look right — mind checking it?';em.focus();return false}
   if(!zipOk){zip.classList.add('err');err.textContent='ZIP should be 5 digits — that\u2019s how we find your neighborhood.';zip.focus();return false}
-  /* TODO: fetch('YOUR_ENDPOINT',{method:'POST',body:JSON.stringify({email:em.value,zip:zip.value})}) */
+  wlPush(em.value.trim(), zip.value.trim());
   document.getElementById('wlForm').style.display='none';
   err.style.display='none';
   const done=document.getElementById('wlDone');
