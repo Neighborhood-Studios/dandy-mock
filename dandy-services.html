@@ -103,9 +103,11 @@ h3{font-size:17px;font-weight:800;letter-spacing:-.2px}
 .btn-ghost{background:transparent;color:var(--blue);border:1.5px solid var(--hair)}
 
 /* ── Scroll reveals ── */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.9,.34,1)}
+document.documentElement.classList.add('js');
+
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.9,.34,1)}
 .reveal.in{opacity:1;transform:none}
-.reveal-stagger>*{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.9,.34,1)}
+.js .reveal-stagger>*{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.9,.34,1)}
 .reveal-stagger.in>*{opacity:1;transform:none}
 .reveal-stagger.in>*:nth-child(2){transition-delay:.08s}
 .reveal-stagger.in>*:nth-child(3){transition-delay:.16s}
@@ -166,7 +168,7 @@ nav .pagechip{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform
 .cat li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:var(--text-2);padding:5px 0}
 .tb{width:18px;height:18px;border-radius:6px;background:var(--pink-light);flex:none;margin-top:1px;
   display:flex;align-items:center;justify-content:center;position:relative}
-.tb i{font-style:normal;font-size:11px;font-weight:900;color:var(--blue);opacity:0;transform:scale(.4);
+.js .tb i{font-style:normal;font-size:11px;font-weight:900;color:var(--blue);opacity:0;transform:scale(.4);
   transition:opacity .3s,transform .3s cubic-bezier(.3,1.6,.5,1)}
 .cat.ticked .tb i{opacity:1;transform:scale(1)}
 /* stagger the ticks so each card checks itself off */
@@ -238,7 +240,7 @@ nav .pagechip{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform
   padding:26px;position:relative;min-height:380px}
 .sorter .s-title{font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.4);text-align:center}
 .sorter-stage{position:relative;height:120px;margin-top:14px}
-.sort-chip{position:absolute;left:50%;top:8px;transform:translate(-50%,0) scale(.7);opacity:0;
+.js .sort-chip{position:absolute;left:50%;top:8px;transform:translate(-50%,0) scale(.7);opacity:0;
   background:#fff;color:var(--blue);font-size:13.5px;font-weight:700;border-radius:99px;padding:10px 18px;
   box-shadow:0 14px 40px rgba(0,0,0,.35);white-space:nowrap;
   transition:transform .8s cubic-bezier(.4,.9,.4,1),opacity .5s}
@@ -254,7 +256,7 @@ nav .pagechip{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform
 .bucket.pro .b-label{color:rgba(255,255,255,.5)}
 .bucket .b-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
 .bucket ul{list-style:none;margin-top:10px}
-.bucket li{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.85);padding:5px 10px;border-radius:9px;
+.js .bucket li{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.85);padding:5px 10px;border-radius:9px;
   background:rgba(255,255,255,.07);margin-top:6px;opacity:0;transform:translateY(-6px);
   transition:opacity .4s,transform .4s;display:flex;gap:7px;align-items:center}
 .bucket li.show{opacity:1;transform:none}
@@ -281,13 +283,13 @@ footer a:hover{color:#fff}
 footer .grow{flex:1}
 
 @media (prefers-reduced-motion:reduce){
-  .reveal,.reveal-stagger>*{opacity:1;transform:none;transition:none}
+  .reveal,.js .reveal-stagger>*{opacity:1;transform:none;transition:none}
   .mq .track{animation:none}
   .cat .tb i,.season .tb i{opacity:1;transform:none;transition:none}
   .season.active{transform:none}
   .season .s-bar{display:none}
-  .sort-chip{display:none}
-  .bucket li{opacity:1;transform:none}
+  .js .sort-chip{display:none}
+  .js .bucket li{opacity:1;transform:none}
 }
 </style>
 </head>
