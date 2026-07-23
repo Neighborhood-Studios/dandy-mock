@@ -16,6 +16,6 @@ GitHub Pages site for Dandy, deployed from the `main` branch root at **https://h
 ## Structure
 
 - `assets/` — all page images, content-hashed (`img-<sha1-10>.<ext>`), deduped across pages. Images are kept **external** (not inline base64) so page HTML stays far under Apple's ~1MB iMessage preview cap.
-- Root files required by crawlers/link previews — do not remove: `og-image.jpg` (every page's `og:image`), `apple-touch-icon.png` (+ `-precomposed.png`, requested by Apple's preview crawler), `favicon.ico`, `CNAME`.
+- Root files required by crawlers/link previews — do not remove: `og-image.jpg` (every page's `og:image`), `apple-touch-icon.png` (+ `-precomposed.png`, requested by Apple's preview crawler), `favicon.ico`, `favicon.svg` + `favicon-32x32.png` (linked from every page's head), `site.webmanifest` + `icon-192.png` / `icon-512.png` (PWA manifest + its icons), `CNAME`.
 
 See [README-HANDOFF.md](README-HANDOFF.md) for page mechanics, waitlist integrations, and the SEO/OG deploy checklist.
