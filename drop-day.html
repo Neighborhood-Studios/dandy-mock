@@ -73,7 +73,10 @@ src="https://www.facebook.com/tr?id=1101244721912216&ev=PageView&noscript=1"
   ═══════════════════════════════════════════════════════════════════
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet"></noscript>
 <style>
 :root{
   --blue:#003953; --blue-2:#074D6F; --blue-deep:#00293C;
@@ -265,7 +268,7 @@ body.is-soldout .soldout{display:flex}
 
   <!-- ══ SOLD OUT: single centered card, GIF edge-to-edge ══ -->
   <div class="soldout">
-    <img src="/assets/img-27a8797519.gif" alt="Sold out — two pink Dandy tickets stamped SOLD OUT">
+    <img src="/assets/img-27a8797519.gif" alt="Sold out — two pink Dandy tickets stamped SOLD OUT" loading="lazy" decoding="async">
     <div class="so-body">
       <h2>The drop came — <span class="accent">and it's gone.</span></h2>
       <p><b style="color:var(--blue)">All 50 spots sold out.</b> A Dandyman can only truly care for 50 homes — that's the whole neighborhood. Join the waitlist for first notice (and first claim) when the next drop opens.</p>
