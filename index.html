@@ -152,13 +152,24 @@ section{position:relative;padding:96px 0;scroll-margin-top:70px}
   .hero-copy{text-align:center}
   .hero-copy .pill{margin-left:auto;margin-right:auto;max-width:100%}
   .hero-copy > div[style*="display:flex"]{justify-content:center}
-  .hero-copy p{margin-left:auto;margin-right:auto}
+  .hero-copy p{margin-left:auto;margin-right:auto;max-width:100%}
   .hero-photo{margin:0 auto;max-width:min(480px,100%)}
   .hero-photo .frame img{width:100%}
   .chipf{max-width:82%}
   .chipf[style*="right:-5%"]{right:2%!important}
   .chipf[style*="left:-5%"]{left:2%!important}
   .chipf[style*="left:-6%"]{left:2%!important}
+}
+
+
+/* ── Drop map chips on phones: spread out + one-line teaser ── */
+@media(max-width:560px){
+  .map-chip{font-size:11px;padding:8px 11px}
+  #chipDH{left:4%!important;top:30%!important}
+  #chipDec{left:auto!important;right:2%!important;top:52%!important}
+  #chipEA{left:8%!important;top:80%!important;white-space:nowrap;max-width:none}
+  #chipEA .chip-status{font-size:11px}
+  .chip-face{width:44px;height:44px;top:-50px}
 }
 
 /* ── Mobile polish (Whit pre-launch pass) ── */
@@ -175,16 +186,14 @@ section{position:relative;padding:96px 0;scroll-margin-top:70px}
   .price-card .btn{white-space:nowrap;font-size:14px;padding:14px 12px}
 }
 @media(max-width:430px){
-  .pill{font-size:10.5px;padding:7px 12px;white-space:nowrap;gap:6px}
-  .pill .dotp{width:7px;height:7px}
+  .pill{font-size:clamp(8.5px,2.7vw,11px);padding:7px 10px;white-space:nowrap;gap:6px;max-width:100%}
+  .pill .dotp{width:7px;height:7px;flex:none}
   .lfull{display:none}.lshort{display:inline}
 }
 @media(max-width:400px){
   .receipt h2{font-size:21px!important}
 }
-@media(max-width:345px){
-  .pill{font-size:9.5px}
-}
+
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -224,7 +233,7 @@ nav.scrolled .bar{padding:13px 24px}
   background:radial-gradient(circle,rgba(237,228,216,.9),transparent 66%);pointer-events:none;z-index:-1}
 .hero .wrap{position:relative;z-index:1}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-@media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px}}
+@media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px}.hero-grid>*{min-width:0;max-width:100%}}
 .hero .pill{display:inline-flex;align-items:center;gap:8px;background:var(--pink-light);color:var(--blue);
   font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px;margin-bottom:22px}
 .hero .pill .dotp{width:7px;height:7px;border-radius:50%;background:#2E9E5B;box-shadow:0 0 8px rgba(46,158,91,.7)}
