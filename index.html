@@ -107,6 +107,7 @@ src="https://www.facebook.com/tr?id=1101244721912216&ev=PageView&noscript=1"
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+html{overflow-x:hidden;width:100%}
 body{font-family:'Inter',-apple-system,sans-serif;color:var(--blue);background:var(--cream);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
 img{display:block;max-width:100%}
@@ -142,6 +143,22 @@ section{position:relative;padding:96px 0;scroll-margin-top:70px}
 .reveal-stagger.in>*:nth-child(1){transition-delay:.05s}.reveal-stagger.in>*:nth-child(2){transition-delay:.14s}
 .reveal-stagger.in>*:nth-child(3){transition-delay:.23s}.reveal-stagger.in>*:nth-child(4){transition-delay:.32s}
 .reveal-stagger.in>*:nth-child(5){transition-delay:.41s}.reveal-stagger.in>*:nth-child(6){transition-delay:.5s}
+
+
+/* ── Mobile hero: centered + overflow-proof ── */
+@media(max-width:880px){
+  .hero .wrap{max-width:100%}
+  .hero-copy{text-align:center}
+  .hero-copy .pill{margin-left:auto;margin-right:auto;max-width:100%}
+  .hero-copy > div[style*="display:flex"]{justify-content:center}
+  .hero-copy p{margin-left:auto;margin-right:auto}
+  .hero-photo{margin:0 auto;max-width:min(480px,100%)}
+  .hero-photo .frame img{width:100%}
+  .chipf{max-width:82%}
+  .chipf[style*="right:-5%"]{right:2%!important}
+  .chipf[style*="left:-5%"]{left:2%!important}
+  .chipf[style*="left:-6%"]{left:2%!important}
+}
 
 /* ── Mobile polish (Whit pre-launch pass) ── */
 .mbr{display:none}
@@ -1015,7 +1032,7 @@ nav.scrolled .bar{padding:13px 24px}
       <form class="wl-form" id="wlForm" onsubmit="return wlSubmit(event)" novalidate>
         <input class="wl-in" id="wlEmail" type="email" placeholder="you@email.com" autocomplete="email" required>
         <input class="wl-in wl-phone" id="wlPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(404) 555-0123" style="display:none">
-        <input class="wl-in wl-zip" id="wlZip" type="text" inputmode="numeric" placeholder="ZIP" maxlength="5" required>
+        <input class="wl-in wl-zip" id="wlZip" type="text" inputmode="numeric" placeholder="zip" maxlength="5" required>
         <button class="btn btn-pink wl-btn" type="submit">Join the waitlist</button>
       </form>
       <p class="wl-err" id="wlErr"></p>
