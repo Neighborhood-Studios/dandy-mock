@@ -146,20 +146,6 @@ section{position:relative;padding:96px 0;scroll-margin-top:70px}
 .reveal-stagger.in>*:nth-child(5){transition-delay:.41s}.reveal-stagger.in>*:nth-child(6){transition-delay:.5s}
 
 
-/* ── Mobile hero: centered + overflow-proof ── */
-@media(max-width:880px){
-  .hero .wrap{max-width:100%}
-  .hero-copy{text-align:center}
-  .hero-copy .pill{margin-left:auto;margin-right:auto;max-width:100%}
-  .hero-copy > div[style*="display:flex"]{justify-content:center}
-  .hero-copy p{margin-left:auto;margin-right:auto;max-width:100%}
-  .hero-photo{margin:0 auto;max-width:min(480px,100%)}
-  .hero-photo .frame img{width:100%}
-  .chipf{max-width:82%}
-  .chipf[style*="right:-5%"]{right:2%!important}
-  .chipf[style*="left:-5%"]{left:2%!important}
-  .chipf[style*="left:-6%"]{left:2%!important}
-}
 
 
 /* ── Drop map chips on phones: spread out + one-line teaser ── */
@@ -185,16 +171,15 @@ section{position:relative;padding:96px 0;scroll-margin-top:70px}
   .price-card{padding:28px 18px}
   .price-card .btn{white-space:nowrap;font-size:clamp(12px,3.6vw,14px);padding:14px 10px}
 }
-@media(max-width:560px){
-  .hero-copy .pill{font-size:clamp(8px,2.3vw,11.5px);padding:6px 10px;white-space:nowrap;gap:6px;
-    max-width:100%;overflow:hidden}
-  .pill .dotp{width:7px;height:7px;flex:none}
+@media(max-width:640px){
+  .hero .pill{
+    font-size:calc((100vw - 96px) / 31.6);   /* plain calc: parses everywhere */
+    font-size:min(12px, calc((100vw - 96px) / 31.6)); /* cap where min() exists */
+    padding:6px 10px;white-space:nowrap;gap:6px;max-width:100%;overflow:hidden}
+  .hero .pill .dotp{width:7px;height:7px;flex:none}
 }
 @media(max-width:430px){
   .lfull{display:none}.lshort{display:inline}
-}
-@media(max-width:340px){
-  .hero-copy .pill{font-size:7.5px;padding:5px 8px}
 }
 @media(max-width:400px){
   .receipt h2{font-size:21px!important}
@@ -676,7 +661,7 @@ nav.scrolled .bar{padding:13px 24px}
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
-      <div class="reveal in">
+      <div class="hero-copy reveal in">
         <span class="pill"><span class="dotp"></span>Homegrown in Atlanta. Now serving 8 neighborhoods.</span>
         <h1 style="font-size:clamp(40px,5.6vw,64px);line-height:1.04;letter-spacing:-2px">Same handyman,<br><span class="accent">every time.</span></h1>
         <p class="lede">Dandy is an ongoing home care membership built around one exceptional handyman who manages upkeep, repairs, and small projects that come with owning a home.</p>
@@ -1085,6 +1070,24 @@ nav.scrolled .bar{padding:13px 24px}
 
 
 <script>
+
+/* ── Pill fit guarantee: measure & shrink until it physically fits.
+   Inline style wins over any (possibly mangled) stylesheet rule. ── */
+function fitHeroPill(){
+  const p = document.querySelector('.hero .pill');
+  if(!p) return;
+  p.style.fontSize = '';                       // start from stylesheet size
+  let guard = 24;
+  while(p.scrollWidth > p.clientWidth && guard-- > 0){
+    const cur = parseFloat(getComputedStyle(p).fontSize);
+    if(cur <= 7) break;
+    p.style.fontSize = (cur - 0.5) + 'px';
+  }
+}
+fitHeroPill();
+addEventListener('resize', fitHeroPill);
+addEventListener('load', fitHeroPill);          // re-check after webfonts land
+
 /* ── Nav: frost on scroll ── */
 document.documentElement.classList.add('js');
 
