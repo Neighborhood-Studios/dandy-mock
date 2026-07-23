@@ -1210,7 +1210,7 @@ const WAITLIST = {
      The `phone` key is ALWAYS included in the Zapier payload (empty
      string while hidden) so the Zap mapping can be set up now and the
      experiment toggled later with zero rewiring. */
-  collectPhone: true,
+  collectPhone: false,
   /* ── FALLBACK: direct pushes (no Zapier logic — no zip filtering,
      tags, or emails). Only used if the webhook above is not set. ── */
   hubspot:  { portalId: 'YOUR_PORTAL_ID', formGuid: 'YOUR_FORM_GUID' },
