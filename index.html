@@ -142,6 +142,32 @@ section{position:relative;padding:96px 0;scroll-margin-top:70px}
 .reveal-stagger.in>*:nth-child(1){transition-delay:.05s}.reveal-stagger.in>*:nth-child(2){transition-delay:.14s}
 .reveal-stagger.in>*:nth-child(3){transition-delay:.23s}.reveal-stagger.in>*:nth-child(4){transition-delay:.32s}
 .reveal-stagger.in>*:nth-child(5){transition-delay:.41s}.reveal-stagger.in>*:nth-child(6){transition-delay:.5s}
+
+/* ── Mobile polish (Whit pre-launch pass) ── */
+.mbr{display:none}
+.rline em{font-style:normal}
+.lshort{display:none}
+@media(max-width:560px){
+  .mbr{display:inline}
+}
+@media(max-width:480px){
+  .dbr{display:none}                                   /* headings wrap to 2 natural lines */
+  .receipt h2{font-size:23px!important}
+  .price-card{padding:34px 24px}
+  .price-card .btn{white-space:nowrap;font-size:14px;padding:14px 12px}
+}
+@media(max-width:430px){
+  .pill{font-size:10.5px;padding:7px 12px;white-space:nowrap;gap:6px}
+  .pill .dotp{width:7px;height:7px}
+  .lfull{display:none}.lshort{display:inline}
+}
+@media(max-width:400px){
+  .receipt h2{font-size:21px!important}
+}
+@media(max-width:345px){
+  .pill{font-size:9.5px}
+}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .reveal,.js .reveal-stagger>*{opacity:1!important;transform:none!important}}
@@ -157,7 +183,7 @@ nav.scrolled .bar{padding:13px 24px}
 .nav-links{display:flex;gap:32px;align-items:center;font-weight:600;font-size:14.5px;color:var(--text-2)}
 .nav-links a:hover{color:var(--blue)}
 .burger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
-.burger span{width:22px;height:2.5px;border-radius:2px;background:var(--blue);transition:transform .25s,opacity .2s}
+.burger span{width:22px;height:2px;border-radius:2px;background:var(--blue);transition:transform .25s,opacity .2s}
 .mnav{position:fixed;top:0;right:0;bottom:0;width:min(320px,84vw);background:var(--cream);z-index:200;
   box-shadow:-20px 0 60px rgba(0,41,60,.2);padding:90px 32px 32px;transform:translateX(105%);
   transition:transform .32s cubic-bezier(.25,1,.4,1);display:flex;flex-direction:column;gap:6px}
@@ -206,7 +232,7 @@ nav.scrolled .bar{padding:13px 24px}
 .chipf .t2{font-size:11px;color:var(--text-2)}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @media(max-width:920px){
-  .hero{padding:132px 0 64px}
+  .hero{padding:104px 0 56px}
   .marquee{margin-top:48px}
   .hero-photo{margin:0 6px}
   .chipf{padding:9px 12px}
@@ -626,7 +652,7 @@ nav.scrolled .bar{padding:13px 24px}
           <a class="btn btn-ghost" href="#how">See how it works</a>
         </div>
         <p style="font-size:13px;font-weight:600;color:var(--text-2);margin-top:16px">
-          <span class="spark">✦</span> One exceptional handyman, dedicated to a small number of homes nearby.</p>
+          <span class="spark">✦</span> One exceptional handyman,<br class="mbr"> dedicated to a small number of homes nearby.</p>
       </div>
 
       <div class="hero-photo reveal in" style="transition-delay:.15s">
@@ -723,7 +749,7 @@ nav.scrolled .bar{padding:13px 24px}
   <div class="wrap">
     <div style="text-align:center;max-width:640px;margin:0 auto" class="reveal">
       <div class="eyebrow">How it works</div>
-      <h2 style="margin-top:14px">However it gets on the list,<br>we’re <span class="accent">on top of it.</span></h2>
+      <h2 style="margin-top:14px">However it gets on the list,<br class="dbr"> we’re <span class="accent">on top of it.</span></h2>
     </div>
     <div class="lanes reveal-stagger">
       <div class="lane photo-top">
@@ -777,7 +803,7 @@ nav.scrolled .bar{padding:13px 24px}
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:660px;margin:0 auto">
       <div class="eyebrow">Built around your home</div>
-      <h2 style="margin-top:14px">Choose a cadence that's right<br>for <span class="accent">your home.</span></h2>
+      <h2 style="margin-top:14px">Choose a cadence that's right<br class="dbr"> for <span class="accent">your home.</span></h2>
       <p class="lede" style="margin-top:16px">Every membership includes 1.5 hours of handyman work a month. Take it monthly, or take it as a fully prepared half-day each quarter that clears out the list.</p>
     </div>
 
@@ -880,7 +906,7 @@ nav.scrolled .bar{padding:13px 24px}
         <div class="rline"><span>Replace shower head</span><i></i><b>$215</b></div>
         <div class="rline"><span>Patch &amp; hang gallery wall</span><i></i><b>$260</b></div>
         <div class="rline"><span>Fix squeaky door</span><i></i><b>$95</b></div>
-        <div class="rline"><span>Filter swap + detector batteries</span><i></i><b>$130</b></div>
+        <div class="rline"><span><em class="lfull">Filter swap + detector batteries</em><em class="lshort">Filter + battery swap</em></span><i></i><b>$130</b></div>
         <div class="rline"><span>Trip &amp; service-call fees</span><i></i><b>$136</b></div>
         <div class="rtotal">
           <span>TOTAL</span>
