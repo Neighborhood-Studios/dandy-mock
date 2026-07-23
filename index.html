@@ -135,16 +135,16 @@ section{position:relative;padding:96px 0;scroll-margin-top:70px}
 .spark{color:var(--pink)}
 
 /* Reveal system */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.9,.34,1)}
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.9,.34,1)}
 .reveal.in{opacity:1;transform:none}
-.reveal-stagger>*{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.9,.34,1)}
+.js .reveal-stagger>*{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.9,.34,1)}
 .reveal-stagger.in>*{opacity:1;transform:none}
 .reveal-stagger.in>*:nth-child(1){transition-delay:.05s}.reveal-stagger.in>*:nth-child(2){transition-delay:.14s}
 .reveal-stagger.in>*:nth-child(3){transition-delay:.23s}.reveal-stagger.in>*:nth-child(4){transition-delay:.32s}
 .reveal-stagger.in>*:nth-child(5){transition-delay:.41s}.reveal-stagger.in>*:nth-child(6){transition-delay:.5s}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}}
+  .reveal,.js .reveal-stagger>*{opacity:1!important;transform:none!important}}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .25s,box-shadow .25s,padding .25s}
@@ -330,7 +330,7 @@ nav.scrolled .bar{padding:13px 24px}
 .tickrow .tb{width:20px;height:20px;border-radius:7px;border:1.5px solid rgba(255,255,255,.3);flex:none;
   display:flex;align-items:center;justify-content:center;font-size:11px;transition:background .25s,border-color .25s}
 .tickrow.on .tb{background:#4CAF77;border-color:#4CAF77}
-.tickrow .tb i{opacity:0;font-style:normal;transition:opacity .2s}
+.tickrow .js .tb i{opacity:0;font-style:normal;transition:opacity .2s}
 .tickrow.on .tb i{opacity:1}
 
 /* ── HOURS SECTION + PHONE DEMOS ── */
@@ -386,7 +386,7 @@ nav.scrolled .bar{padding:13px 24px}
 .vt-demo{padding-top:20px}
 .vt-demo .vd-box{background:var(--cream);border:1px solid var(--hair);border-radius:14px;padding:14px 16px}
 .vd-label{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
-.vd-row{display:flex;gap:9px;align-items:center;padding:5px 0;font-size:13px;font-weight:600;color:var(--blue);
+.js .vd-row{display:flex;gap:9px;align-items:center;padding:5px 0;font-size:13px;font-weight:600;color:var(--blue);
   opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
 .vd-row.on{opacity:1;transform:none}
 .vd-row .vb{width:18px;height:18px;border-radius:6px;border:1.5px solid rgba(0,57,83,.22);background:#fff;
@@ -394,11 +394,11 @@ nav.scrolled .bar{padding:13px 24px}
 .vd-row .vb i{font-style:normal;font-size:10px;color:#fff;opacity:0;transition:opacity .15s}
 .vd-row.done .vb{background:#2E9E5B;border-color:#2E9E5B}
 .vd-row.done .vb i{opacity:1}
-.vd-prep{display:inline-flex;gap:6px;align-items:center;background:var(--pink-light);color:var(--blue);
+.js .vd-prep{display:inline-flex;gap:6px;align-items:center;background:var(--pink-light);color:var(--blue);
   font-size:11px;font-weight:800;padding:5px 11px;border-radius:99px;margin:2px 0 6px;
   opacity:0;transform:scale(.9);transition:opacity .35s,transform .35s cubic-bezier(.3,1.4,.5,1)}
 .vd-prep.on{opacity:1;transform:none}
-.vd-fin{font-size:12px;font-weight:800;color:var(--blue);margin-top:8px;opacity:0;transition:opacity .4s}
+.js .vd-fin{font-size:12px;font-weight:800;color:var(--blue);margin-top:8px;opacity:0;transition:opacity .4s}
 .vd-fin.on{opacity:1}
 .vd-fin .spark{margin-left:2px}
 
@@ -416,7 +416,7 @@ nav.scrolled .bar{padding:13px 24px}
   font-family:ui-monospace,'SF Mono',Menlo,monospace;position:relative;transform:rotate(-.6deg)}
 .rcpt-head{font-size:10.5px;letter-spacing:2px;text-align:center;color:rgba(14,42,56,.45);
   border-bottom:1.5px dashed rgba(14,42,56,.2);padding-bottom:14px;margin-bottom:8px;line-height:1.9;font-weight:700}
-.rline{display:flex;align-items:baseline;gap:8px;padding:8px 0;font-size:13px;
+.js .rline{display:flex;align-items:baseline;gap:8px;padding:8px 0;font-size:13px;
   opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}
 .rline.on{opacity:1;transform:none}
 .rline span{flex:none}
@@ -433,8 +433,9 @@ nav.scrolled .bar{padding:13px 24px}
 .money-strike{position:absolute;left:-4%;top:52%;height:7px;width:0%;border-radius:4px;background:var(--pink);
   transform:rotate(-5deg);box-shadow:0 0 18px rgba(249,171,172,.6);transition:width .5s cubic-bezier(.3,.9,.3,1)}
 .money-strike.on{width:108%}
+.js #moneySub{opacity:0}
 .money-sub{font-size:13.5px;color:rgba(255,255,255,.55);margin-top:30px}
-.dandy-card{background:#fff;color:var(--blue);border-radius:24px;padding:30px 36px;display:inline-block;margin-top:34px;
+.js .dandy-card{background:#fff;color:var(--blue);border-radius:24px;padding:30px 36px;display:inline-block;margin-top:34px;
   box-shadow:0 30px 80px rgba(0,0,0,.35);opacity:0;transform:translateY(26px) scale(.96);
   transition:opacity .6s ease,transform .6s cubic-bezier(.25,1.2,.4,1)}
 .dandy-card.on{opacity:1;transform:none}
@@ -479,13 +480,13 @@ nav.scrolled .bar{padding:13px 24px}
 .gtile .gcap em{display:block;font-style:normal;font-size:10.5px;font-weight:700;color:var(--text-3);letter-spacing:.2px;margin-top:2px}
 
 /* ── Drop map: Dandyman chips that pop in and sell out ── */
-.drop-chip{display:flex;align-items:center;gap:9px;animation:none;opacity:0;transform:scale(.55);
+.js .drop-chip{display:flex;align-items:center;gap:9px;animation:none;opacity:0;transform:scale(.55);
   transition:opacity .45s ease,transform .5s cubic-bezier(.3,1.4,.5,1)}
 .drop-chip.on{opacity:1;transform:scale(1)}
 .chip-face{position:absolute;top:-62px;left:50%;transform:translateX(-50%);width:54px;height:54px;
   border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 10px 26px rgba(0,0,0,.38)}
 .chip-status{font-variant-numeric:tabular-nums}
-@media (prefers-reduced-motion:reduce){.drop-chip{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){.js .drop-chip{opacity:1;transform:none;transition:none}}
 
 /* ── NEIGHBORHOODS ── */
 .hoods{background:linear-gradient(180deg,#02405E 0%,#00293C 100%);color:#fff;overflow:hidden}
@@ -856,7 +857,7 @@ nav.scrolled .bar{padding:13px 24px}
           <li><span class="ck">✓</span><span><b>The Dandy app</b> — video to-dos, effortless booking, visit recaps</span></li>
           <li><span class="ck">✓</span><span><b>24/7 virtual support</b> — message us anytime</span></li>
         </ul>
-        <a class="btn btn-blue" style="width:100%;margin-top:24px" href="#join">Claim your neighborhood spot</a>
+        <a class="btn btn-blue" style="width:100%;margin-top:24px;justify-content:center" href="#join">Claim your neighborhood spot</a>
         <p class="small" style="text-align:center;margin-top:12px">Month-to-month · cancel anytime</p>
       </div>
     </div>
@@ -887,7 +888,7 @@ nav.scrolled .bar{padding:13px 24px}
         </div>
         <div class="rcpt-zig"></div>
       </div>
-      <div class="money-sub" id="moneySub" style="opacity:0;transition:opacity .4s">Line items reflect average listed Atlanta handyman rates for comparable jobs, July 2026. One-off pricing typically runs $800–$1,500 per multi-task visit.</div>
+      <div class="money-sub" id="moneySub" style="transition:opacity .4s">Line items reflect average listed Atlanta handyman rates for comparable jobs, July 2026. One-off pricing typically runs $800–$1,500 per multi-task visit.</div>
       <div><div class="dandy-card" id="dandyCard">
         <div class="yp">A Dandy member pays</div>
         <div class="amt">$149<small>/mo</small> <span class="spark">✦</span></div>
@@ -955,18 +956,22 @@ nav.scrolled .bar{padding:13px 24px}
       <h2 style="margin-top:12px">Fair asks.</h2>
     </div>
     <div style="margin-top:36px" class="reveal">
-      <div class="faq-item"><div class="q">How do the visits work?<span class="pl">＋</span></div>
-        <div class="a">Every month includes 1.5 hours of handyman work. Take it as a monthly short visit, or as a fully prepared half-day each quarter — most members choose the half-day, and you can switch cadences anytime in the app.</div></div>
+      <div class="faq-item"><div class="q">How do Dandy visits work?<span class="pl">＋</span></div>
+        <div class="a">Your membership includes an average of 1.5 hours of handyman work each month. Use that time for shorter visits when something needs attention, or save it for a fully prepared half-day visit. Most members choose the half-day, but you can use your time however your home needs it.</div></div>
+      <div class="faq-item"><div class="q">What is a Dandy drop?<span class="pl">＋</span></div>
+        <div class="a">We bring Dandy to Atlanta one neighborhood at a time. First, we hire an exceptional handyman and dedicate him to that neighborhood. Then all 50 memberships become available on the same day. Once those spots are claimed, the neighborhood closes and we move on to the next.</div></div>
       <div class="faq-item"><div class="q">Is it really the same handyman every time?<span class="pl">＋</span></div>
-        <div class="a">Yes — that's the whole product. Your Dandyman is a full-time, background-checked Dandy employee assigned to about 50 homes in your neighborhood. If he's ever out sick, we'll tell you before the visit, never surprise you at the door.</div></div>
-      <div class="faq-item"><div class="q">What counts as autopilot?<span class="pl">＋</span></div>
-        <div class="a">Routine care every home needs: HVAC filter swaps, smoke detector batteries, weatherstripping and caulk inspection, dryer vent clearing, and seasonal checks.</div></div>
-      <div class="faq-item"><div class="q">What kinds of tasks does my Dandyman handle?<span class="pl">＋</span></div>
-        <div class="a">Hundreds of common home tasks — preventative maintenance like HVAC filters and safety checks, plus everyday repairs like fixtures, drywall, caulking, and installs. If it can be safely completed during your scheduled visit, there's a good chance we can help.<br><a href="dandy-services.html" style="color:var(--blue);font-weight:700;display:inline-block;margin-top:10px">See what Dandy covers →</a></div></div>
-      <div class="faq-item"><div class="q">What if a job is too big for a visit?<span class="pl">＋</span></div>
-        <div class="a">Your Dandyman will tell you straight, help you scope it, and connect you with a vetted specialist. We'd rather protect your trust than stretch a job.</div></div>
-      <div class="faq-item"><div class="q">Can I cancel?<span class="pl">＋</span></div>
-        <div class="a">Anytime, month-to-month. Fair warning: your neighborhood spot goes back into the drop, and drops sell out.</div></div>
+        <div class="a">Yes. Your Dandyman is dedicated to just 50 members in one neighborhood, so you see the same familiar person visit after visit. Over time, he gets to know your home, your preferences, and what may need attention next.</div></div>
+      <div class="faq-item"><div class="q">What kinds of work can my Dandyman handle?<span class="pl">＋</span></div>
+        <div class="a">Your Dandyman can take care of common home repairs, routine maintenance, installations, adjustments, and lingering small projects. Think sticking doors, faulty fixtures, drywall patches, caulking, filter changes, furniture assembly, and the everyday work that keeps a home in good shape. View the list of services we provide <a href="dandy-services.html" style="color:var(--blue);font-weight:700">here</a>.</div></div>
+      <div class="faq-item"><div class="q">What routine maintenance does Dandy keep track of?<span class="pl">＋</span></div>
+        <div class="a">Dandy helps keep recurring home-care tasks on the radar, including things like HVAC filters, smoke detectors, water-heater flushing, and refrigerator-coil cleaning. We fold them into your visits so they do not become one more thing for you to remember.</div></div>
+      <div class="faq-item"><div class="q">How does Dandy prepare for a visit?<span class="pl">＋</span></div>
+        <div class="a">Before a visit, the Dandy team reviews your list, identifies what may be needed, and helps source the appropriate parts and supplies. That way, your Dandyman can arrive prepared and spend more of the visit getting things done.</div></div>
+      <div class="faq-item"><div class="q">What if a project is too large or specialized?<span class="pl">＋</span></div>
+        <div class="a">We’ll let you know before the visit. Your Dandyman can often handle part of the work, help diagnose the issue, or guide you toward the right licensed specialist when a job falls outside Dandy’s scope.</div></div>
+      <div class="faq-item"><div class="q">Can I cancel my membership?<span class="pl">＋</span></div>
+        <div class="a">Yes. Dandy is month-to-month, and you can cancel anytime.</div></div>
     </div>
   </div>
 </section>
@@ -1022,6 +1027,8 @@ nav.scrolled .bar{padding:13px 24px}
 
 <script>
 /* ── Nav: frost on scroll ── */
+document.documentElement.classList.add('js');
+
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>24),{passive:true});
 
