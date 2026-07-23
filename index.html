@@ -314,11 +314,11 @@ nav.scrolled .bar{padding:13px 24px}
 .vt-badge{position:absolute;top:-13px;left:22px;background:var(--pink);color:var(--blue);
   font-size:11.5px;font-weight:800;letter-spacing:.6px;padding:6px 14px;border-radius:99px;
   box-shadow:0 6px 18px rgba(249,171,172,.45)}
-.vt-icon{width:48px;height:48px;border-radius:14px;background:var(--pink-light);border:1px solid transparent;
+.vt-icon{width:64px;height:64px;border-radius:17px;background:var(--pink-light);border:1px solid transparent;
   display:flex;align-items:center;justify-content:center}
-.vt-icon img{width:26px;height:26px;object-fit:contain}
+.vt-icon img{width:38px;height:38px;object-fit:contain}
 .vt-card.rec .vt-icon{background:var(--pink-light);border-color:transparent}
-.vt-card h3{font-size:22px;margin-top:16px}
+.vt-card h3{font-size:22px;margin-top:12px}
 .vt-card .vt-sub{font-size:13px;font-weight:700;color:var(--text-3);letter-spacing:1px;
   text-transform:uppercase;margin-top:4px}
 .vt-card p{font-size:14.5px;line-height:1.62;color:var(--text-2);margin-top:12px}
@@ -743,8 +743,7 @@ nav.scrolled .bar{padding:13px 24px}
             <span class="vd-prep">✦ Parts &amp; supplies prepped before arrival</span>
             <div class="vd-row"><span class="vb"><i>✓</i></span>Fix the running toilet</div>
             <div class="vd-row"><span class="vb"><i>✓</i></span>Rehang the closet door</div>
-            <div class="vd-row"><span class="vb"><i>✓</i></span>Swap the HVAC filter</div>
-            <div class="vd-fin">In and out — three things off the list.</div>
+            <div class="vd-fin">In and out — two things off the list.</div>
           </div>
         </div>
       </div>
@@ -907,7 +906,7 @@ nav.scrolled .bar{padding:13px 24px}
       <div class="faq-item"><div class="q">What counts as autopilot?<span class="pl">＋</span></div>
         <div class="a">Routine care every home needs: HVAC filter swaps, smoke detector batteries, first-story gutter checks, weatherstripping and caulk inspection, dryer vent clearing, and seasonal checks. Your Dandyman folds them into visits automatically.</div></div>
       <div class="faq-item"><div class="q">What kinds of tasks does my Dandyman handle?<span class="pl">＋</span></div>
-        <div class="a">Hundreds of common home tasks — preventative maintenance like HVAC filters, water heater flushes, and safety checks, plus everyday repairs like fixtures, drywall, caulking, and installs. If it can be safely completed during your scheduled visit, there's a good chance we can help. <a href="services.html" style="color:var(--blue);font-weight:700">See what Dandy covers →</a></div></div>
+        <div class="a">Hundreds of common home tasks — preventative maintenance like HVAC filters, water heater flushes, and safety checks, plus everyday repairs like fixtures, drywall, caulking, and installs. If it can be safely completed during your scheduled visit, there's a good chance we can help. <a href="dandy-services.html" style="color:var(--blue);font-weight:700">See what Dandy covers →</a></div></div>
       <div class="faq-item"><div class="q">What if a job is too big for a visit?<span class="pl">＋</span></div>
         <div class="a">Your Dandyman will tell you straight, help you scope it, and connect you with a vetted specialist. We'd rather protect your trust than stretch a job.</div></div>
       <div class="faq-item"><div class="q">Can I cancel?<span class="pl">＋</span></div>
@@ -954,14 +953,12 @@ nav.scrolled .bar{padding:13px 24px}
       </div>
       <div>
         <p style="color:#fff;font-weight:700;margin-bottom:10px">Explore</p>
-        <p><a href="services.html">Services</a></p>
+        <p><a href="dandy-services.html">Services</a></p>
         <p style="margin-top:6px"><a href="#pricing">Pricing</a></p>
         <p style="margin-top:6px"><a href="#neighborhoods">Neighborhoods</a></p>
       </div>
       <div>
-        <p style="color:#fff;font-weight:700;margin-bottom:10px">Say hi</p>
         <p>Atlanta, Georgia</p>
-        <p style="margin-top:6px">(770) 656-0139</p>
       </div>
     </div>
     <p style="margin-top:44px;font-size:12px;opacity:.6">© 2026 Dandy · <a href="https://www.hidandy.com/privacy-policy">Privacy</a> · <a href="https://www.hidandy.com/terms-of-service">Terms</a> · 30-day Dandy Guarantee on every visit</p>
@@ -1174,13 +1171,14 @@ document.addEventListener('click', function(e){
   function setStatus(chip,txt,color){const s=chip.querySelector('.chip-status'); s.textContent=txt; if(color)s.style.color=color;}
   function finale(){[dh,dec,ea].forEach(c=>c.classList.add('on')); setStatus(dh,'Sold out','#C0392B'); setStatus(dec,'Sold out','#C0392B');}
   if(reduce){finale(); return;}
-  function sellOut(chip,done){
+  function sellOut(chip,onHalf,onDone){
     chip.classList.add('on');
-    let n=50; setStatus(chip,'50 spots','#2E9E5B');
+    let n=50, halved=false; setStatus(chip,'50 spots','#2E9E5B');
     later(()=>{
       const iv=setInterval(()=>{
         n-=1+Math.floor(Math.random()*4);
-        if(n<=0){clearInterval(iv); setStatus(chip,'Sold out','#C0392B'); if(typeof burst==='function')burst(chip); later(done,700);}
+        if(!halved && n<=25 && onHalf){halved=true; onHalf();}
+        if(n<=0){clearInterval(iv); setStatus(chip,'Sold out','#C0392B'); if(typeof burst==='function')burst(chip); if(onDone)later(onDone,700);}
         else setStatus(chip, n+' spots', n<=10?'#C0392B':'#2E9E5B');
       },85); timers.push(iv);
     },900);
@@ -1189,9 +1187,15 @@ document.addEventListener('click', function(e){
     timers.forEach(t=>{clearTimeout(t);clearInterval(t)}); timers.length=0;
     [dh,dec,ea].forEach(c=>c.classList.remove('on'));
     setStatus(dh,'50 spots','#2E9E5B'); setStatus(dec,'50 spots','#2E9E5B');
-    later(()=>sellOut(dh,()=>sellOut(dec,()=>{
-      later(()=>{ea.classList.add('on'); later(play,8000);},500);
-    })),500);
+    // Decatur launches halfway through Druid Hills' countdown;
+    // East Atlanta pops halfway through Decatur's; loop after Decatur sells out.
+    later(()=>sellOut(dh,
+      ()=>sellOut(dec,
+        ()=>ea.classList.add('on'),
+        ()=>later(play,8000)
+      ),
+      null
+    ),500);
   }
   let started=false;
   new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&!started){started=true;play();}})},{threshold:.35}).observe(map);
