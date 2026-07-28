@@ -105,17 +105,13 @@ img{display:block;max-width:100%}
 .chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:99px;
   padding:8px 14px;font-size:12px;font-weight:700;color:rgba(255,255,255,.9)}
 
-.book-card{width:100%;max-width:760px;background:var(--cream);border-radius:26px;overflow:hidden;
-  box-shadow:0 50px 120px rgba(0,0,0,.5);margin-top:26px}
-.bc-head{display:flex;align-items:center;gap:12px;padding:18px 24px;border-bottom:1px solid var(--hair)}
-.bc-head img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,41,60,.18)}
-.bc-head .t{flex:1;text-align:left;min-width:0}
-.bc-head .t b{display:block;font-size:14.5px;letter-spacing:-.1px}
-.bc-head .t span{font-size:11.5px;color:var(--text-3);font-weight:600}
-.free-tag{background:var(--pink-light);color:var(--blue);font-size:10px;font-weight:800;letter-spacing:.8px;border-radius:99px;padding:6px 11px;white-space:nowrap}
-.bc-body{position:relative;min-height:640px}
-.calendly-inline-widget{height:700px;min-height:640px;height:640px}
-.skel{position:absolute;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;
+/* Calendly sits open on the page — wide enough for its landscape
+   layout, soft shadow, no clipping card around it */
+.cal-open{width:min(1100px,calc(100% - 8px));margin:34px auto 0;position:relative;
+  border-radius:20px;box-shadow:0 40px 110px rgba(0,0,0,.45)}
+.cal-open .calendly-inline-widget{border-radius:20px;overflow:hidden;background:#fff}
+@media(max-width:700px){.cal-open{box-shadow:0 24px 70px rgba(0,0,0,.4)}}
+.skel{position:absolute;inset:0;border-radius:20px;background:var(--cream);display:flex;align-items:center;justify-content:center;
   flex-direction:column;gap:12px;color:var(--text-3);z-index:2;padding:20px;text-align:center}
 .skel .bar{width:160px;height:9px;border-radius:99px;background:var(--hair);overflow:hidden;position:relative}
 .skel .bar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--pink-light),transparent);animation:shimmer 1.2s linear infinite}
@@ -167,15 +163,15 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
-<div class="book-card">
-  <div class="bc-body">
-    <div class="skel" id="skel">
-      <div class="bar"></div>
-      <div class="s-note">Pulling up Bill's open times…</div>
-      <a id="skelLink" href="#" target="_blank" rel="noopener">Calendar taking a beat? Open Bill's calendar →</a>
-    </div>
-    <div class="calendly-inline-widget" data-url="https://calendly.com/bill-hidandy/dandy-home-walk-thru" style="min-width:320px;height:700px;"></div>
+<div class="cal-open" id="calOpen">
+  <div class="skel" id="skel">
+    <div class="bar"></div>
+    <div class="s-note">Pulling up Bill's open times…</div>
+    <a id="skelLink" href="#" target="_blank" rel="noopener">Calendar taking a beat? Open Bill's calendar →</a>
   </div>
+  <!-- Calendly inline widget begin -->
+  <div class="calendly-inline-widget" data-url="https://calendly.com/bill-hidandy/dandy-home-walk-thru" style="min-width:320px;height:700px;"></div>
+  <!-- Calendly inline widget end -->
 </div>
 
 <p class="under">Questions first? Call Bill at <a href="tel:+14049055770">(404) 905-5770</a> · <a href="index.html">hidandy.com</a></p>
@@ -191,7 +187,7 @@ document.getElementById('skelLink').href = CALENDLY;
 
 /* skeleton: hide when the Calendly iframe lands; direct link if it stalls */
 (function(){
-  const body=document.querySelector('.bc-body'), skel=document.getElementById('skel');
+  const body=document.getElementById('calOpen'), skel=document.getElementById('skel');
   const check=setInterval(()=>{
     const f=body.querySelector('iframe');
     if(f){
