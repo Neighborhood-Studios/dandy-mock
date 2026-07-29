@@ -118,6 +118,14 @@ img{display:block;max-width:100%}
 .sparkle{position:fixed;pointer-events:none;font-size:16px;color:var(--pink);z-index:210;animation:spfly 1s ease-out forwards}
 @keyframes spfly{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}
 
+
+/* Calendly card: white, rounded, ~2/3 screen on desktop, 90vw on
+   phones — Calendly's own loading spinner shows on the white surface */
+.cal-card{width:66vw;max-width:1120px;margin:48px auto 0;background:#fff;border-radius:22px;
+  overflow:hidden;box-shadow:0 34px 90px rgba(0,0,0,.4)}
+.cal-card .calendly-inline-widget{width:100%}
+@media(max-width:900px){.cal-card{width:90vw;margin-top:36px;border-radius:18px}}
+
 @media (prefers-reduced-motion:reduce){.amb{animation:none}.skel .bar::after{animation:none}}
 </style>
 </head>
@@ -149,9 +157,11 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
-<!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/bill-hidandy/dandy-home-walk-thru" style="min-width:320px;height:700px;"></div>
-<!-- Calendly inline widget end -->
+<div class="cal-card">
+  <!-- Calendly inline widget begin -->
+  <div class="calendly-inline-widget" data-url="https://calendly.com/bill-hidandy/dandy-home-walk-thru" style="min-width:320px;height:850px;"></div>
+  <!-- Calendly inline widget end -->
+</div>
 
 <p class="under">Questions first? Call Bill at <a href="tel:+14049055770">(404) 905-5770</a> · <a href="index.html">hidandy.com</a></p>
 
