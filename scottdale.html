@@ -298,7 +298,10 @@ footer .grow{flex:1}
 .vt-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px;align-items:stretch;position:relative}
 @media(max-width:880px){
   .lanes{grid-template-columns:1fr}
-  .vt-grid{grid-template-columns:1fr;gap:18px}
+  .vt-grid{grid-template-columns:1fr;gap:18px;display:flex;flex-direction:column}
+  .vt-or{position:static;margin:-4px auto;order:2;left:auto;top:auto;transform:none}
+  .vt-card:first-child{order:1}
+  .vt-card.rec{order:3}
 }
 
 .vt-card .vt-demo{margin-top:auto}
