@@ -296,6 +296,10 @@ footer .grow{flex:1}
 
 /* ── VISIT TYPES — short vs half-day (equal cards, soft recommend) ── */
 .vt-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px;align-items:stretch;position:relative}
+@media(max-width:880px){
+  .lanes{grid-template-columns:1fr}
+  .vt-grid{grid-template-columns:1fr;gap:18px}
+}
 
 .vt-card .vt-demo{margin-top:auto}
 
@@ -482,6 +486,8 @@ footer .grow{flex:1}
 @media(max-width:640px){.chipf .t2{display:none}}
 
 
+.dbr{}
+@media(max-width:480px){.dbr{display:none}}
 /* ── Mobile polish (squeeze pass) ── */
 @media(max-width:640px){
   .hero{padding:120px 0 56px}
@@ -635,7 +641,7 @@ footer .grow{flex:1}
   <div class="wrap">
     <div style="text-align:center;max-width:640px;margin:0 auto" class="reveal">
       <div class="eyebrow">How it works</div>
-      <h2 style="margin-top:14px">However it gets on the list,<br>we’re <span class="accent">on top of it.</span></h2>
+      <h2 style="margin-top:14px">However it gets on the list,<br class="dbr"> we’re <span class="accent">on top of it.</span></h2>
     </div>
     <div class="lanes reveal-stagger">
       <div class="lane photo-top">
@@ -689,7 +695,7 @@ footer .grow{flex:1}
   <div class="wrap">
     <div class="reveal" style="text-align:center;max-width:660px;margin:0 auto">
       <div class="eyebrow">Built around your home</div>
-      <h2 style="margin-top:14px">Choose a cadence that's right<br>for <span class="accent">your home.</span></h2>
+      <h2 style="margin-top:14px">Choose a cadence that's right<br class="dbr"> for <span class="accent">your home.</span></h2>
       <p class="lede" style="margin-top:16px">Every membership includes 1.5 hours of handyman work a month. Take it monthly, or take it as a fully prepared half-day each quarter that clears out the list.</p>
     </div>
 
