@@ -76,10 +76,49 @@ All three pages now carry: title ("Dandy Handyman — Same handyman, every time.
 ## Fail-open animations (deployment safety)
 All hidden-until-animated styles (scroll reveals, receipt line items, Dandy card, drop-map chips, checklist ticks) are gated behind an `html.js` class that the page's own script applies on load. **If a deploy pipeline strips or blocks the inline `<script>` (Webflow embed limits are the classic culprit), every section still renders fully visible — just without animation.** Nothing on any page can appear blank due to missing JS. If a deployed page ever shows an empty section, the diagnosis is: the script didn't run AND the CSS was also modified — check both were carried over verbatim.
 
-## Drop Day page — drop-day.html
-Deploy at `/drop-day`. Single-screen, app-like booking page. Load sequence (logo + progress bar + "Welcome to the Drop.") → left panel: Bill hero photo with drop story + fact chips; right panel: branded Calendly embed for `bill-hidandy/dandydropday` (background/text/primary colors passed via URL params, event details + GDPR banner hidden, skeleton shimmer while loading). Bookings fire a sparkle burst + "You're booked ✦" toast and send `fbq('track','Schedule')` + a GA4 `walkthrough_booked` event via Calendly's postMessage API.
-**Two states:** live (default) and sold-out (GIF + "the drop came and it's gone" + waitlist CTA). Switch in production with `?state=soldout` or by flipping `DROP_STATE` in the script. **The bottom-left "Preview: sold-out state" toggle button is for internal testing — delete the `#previewToggle` element before real launch.**
-**Custom availability picker (future):** requires a Calendly API token, which must NOT be placed in page code (it's a secret). Path: a small serverless proxy (Cloudflare Worker / Vercel function) holds the token and exposes a read-only available-slots endpoint; the page then renders a fully custom slot picker against it. Ask Claude to scaffold both when ready.
-
 ## Site index (internal) — site-index.html
 Password-gated overview of every page: preview thumbnail, name, deploy path, one-paragraph description, click-through to the page. **Password: `hidandy`** (all lowercase) (stored as a SHA-256 hash in the code, unlocks for the browser session). ⚠ This is a courtesy gate on a static page — it deters casual visitors but is NOT real security; keep secrets off this page. `noindex,nofollow` is set. Card links are relative (`index.html`, `dandy-services.html`, etc.) so they work in the deployed folder and locally; keep all pages in the same directory. If new pages are added to the site, add a card here.
+
+## Drop Day page — drop-day.html (v2)
+Deploy at `/drop-day`. Single centered card on the blue gradient (no split screen). Loader ("Welcome to the Drop.") → card: Bill door-photo banner with live pill → drop context + fact chips → booking panel. Booking panel has TWO implementations in the file:
+1. **Calendly embed** (active default) — `bill-hidandy/dandydropday`, brand-colored, skeleton shimmer, and a fallback "Open Bill's calendar →" link that appears if the Calendly script can't load (sandboxed previews block it; it works on a real domain). Bookings fire sparkles + toast + `fbq('track','Schedule')` + GA4 `walkthrough_booked` via Calendly postMessage events.
+2. **Custom slot picker** (BUILT, ships dormant) — date strip + time-slot grid UI already coded in the file, gated by `PICKER = { enabled:false, apiBase:'' }`. Preview the UI anytime with `?picker=demo` (clearly-labeled sample slots). See next section to activate for real.
+**Sold-out state:** GIF renders edge-to-edge at the top of the centered card (the source GIF's transparent side margins were cropped out — that was the mystery whitespace), headline + copy + waitlist CTA below. Switch with `?state=soldout` or `DROP_STATE`. **Delete the bottom-left `#previewToggle` button before real launch.**
+
+## Calendly custom picker — ClaudeBot build spec
+**Yes: Whit will supply a Calendly personal access token. It goes ONLY in the proxy's server-side environment (env var `CALENDLY_TOKEN`) — NEVER into any HTML/JS/file served to browsers.** The front-end is already done; ClaudeBot builds one small serverless proxy (Cloudflare Worker / Vercel function) and flips a flag.
+
+**Endpoint to implement:** `GET {apiBase}/slots?days=14`
+Response shape the page expects:
+```json
+{ "days": [ { "date": "2026-07-30",
+              "slots": [ { "start": "2026-07-30T10:00:00-04:00" } ] } ] }
+```
+**Implementation with Calendly API v2** (Bearer CALENDLY_TOKEN):
+1. `GET https://api.calendly.com/users/me` → `resource.uri`
+2. `GET https://api.calendly.com/event_types?user={uri}` → find slug `dandydropday` → its `uri`
+3. `GET https://api.calendly.com/event_type_available_times?event_type={uri}&start_time={A}&end_time={B}` — Calendly caps each query at a 7-day window, so call twice to cover 14 days; concatenate `collection[]` of available times.
+4. Group by date in **America/New_York**, map to the shape above. Cache ~60s. CORS: allow the production origin(s) only. Never echo the token or Calendly URIs beyond what's needed.
+
+**Activate:** in drop-day.html set `PICKER.enabled = true` and `PICKER.apiBase = 'https://<proxy-host>'`. Slot clicks open Calendly's confirm form for that exact time (`https://calendly.com/bill-hidandy/dandydropday/{startISO}`) — booking confirmation stays on Calendly rails, so reminders/reschedules keep working. If the proxy errors, the page automatically falls back to the embed.
+
+## Scottdale page — scottdale.html (direct sales, no drop)
+Deploy at `/scottdale`. Cloned from the Decatur template but converted to DIRECT SALES: no drop mechanics, no waitlist form, no Zapier hook. All CTAs → `/walkthrough`. ⚠ SPELLING: the community's official name is **Scottdale** (no middle "s") — all on-page copy uses "Scottdale"; the URL slug stays `/scottdale` per Whit's request. Local flavor: 1901 cotton-mill village history (mill cottages + new townhome infill), E Ponce corridor, DeKalb Farmers Market, PATH trail, Tobie Grant; ZIP 30079. Dandyman: **Bill**.
+**Click-to-call:** nav pill + final-CTA ghost button, (404) 905-5770. On touch devices these are plain `tel:+14049055770` links; on desktop (fine pointer, >880px) a branded modal opens instead ("Call Bill to schedule your walkthrough" + number + copy button). Sections: hero (Bill door photo + Scottdale chips) → Meet Bill → Built for Scottdale (mill-cottage cards + hood tags) → How it works → Pricing → Receipt (ONE-OFF HANDYMAN · SCOTTDALE) → Getting started (3 walkthrough steps) → FAQ (drop Q replaced with walkthrough Q) → final CTA.
+
+## Walkthrough booking page — walkthrough.html
+Deploy at `/walkthrough`. Centered, brand-framed Calendly embed on the blue gradient: logo topbar with call pill, headline + trust chips, cream booking card (Bill avatar header + FREE·45MIN tag), skeleton shimmer, stalled-fallback direct link. Bookings fire sparkles + toast + `fbq('track','Schedule')` + GA4 `walkthrough_booked`. **CALENDLY URL IS A PLACEHOLDER** — the `CALENDLY` constant at the top of the script currently points at `bill-hidandy/dandydropday`; swap it for the real walkthrough event link when Whit supplies it (brand colors/params are appended automatically).
+
+
+## Scottdale page — scottdale.html (direct sales, no drop)
+Deploy at `/scottdale` (official local spelling, confirmed by Whit). Direct-sales variant of the neighborhood template: NO drop mechanics, no waitlist. All CTAs → `/walkthrough`. Localized for Scottdale: mill-village history (1901 Scottdale Cotton Mill), mill cottages + townhome infill, E Ponce corridor, DeKalb Farmers Market, PATH trail, Tobie Grant, ZIP 30079. Dandyman on this page is **Bill** with his phone throughout.
+**Phone treatment:** desktop shows a plain, traditional number top-right (non-clickable); ≤760px it becomes a tap-to-call pill (`tel:+14049055770`).
+**Inquiry form** (bottom, in the final CTA section): name / phone (optional) / email / message → POSTs JSON to its OWN dedicated Zapier catch hook `https://hooks.zapier.com/hooks/catch/23415577/46sj4zz/` (Scottdale inquiries ONLY — the shared waitlist hook `44zimzq` remains correct for the homepage and Decatur forms; never point Scottdale back at it) with `formType:"inquiry"`, `source:"dandy-scottdale-inquiry"`, `neighborhood:"scottdale"` — branch the Zap on `formType` so inquiries route to email/Slack instead of the waitlist path.
+
+## Walkthrough booking page — walkthrough.html
+Deploy at `/walkthrough`. Brand-framed, centered Calendly embed on the blue gradient for Bill's **dandy-home-walk-thru** event (URL lives in the `CALENDLY` constant at the top of the script; brand colors ride along as URL params). Skeleton shimmer + "Open Bill's calendar →" fallback if the Calendly script can't load. Bookings fire sparkles + toast + `fbq('track','Schedule')` + GA4 `walkthrough_booked`. Same desktop-number / mobile-call-button phone treatment. Linked from every Scottdale CTA.
+
+
+## Zapier hooks — routing map (do not cross these)
+- `44zimzq` — shared WAITLIST hook: homepage (`index.html`) + Decatur (`decatur.html`) forms. Unchanged.
+- `46sj4zz` — dedicated SCOTTDALE INQUIRY hook: `scottdale.html` inquiry form only. Live and wired via ClawBot.
