@@ -122,3 +122,16 @@ Deploy at `/walkthrough`. Brand-framed, centered Calendly embed on the blue grad
 ## Zapier hooks — routing map (do not cross these)
 - `44zimzq` — shared WAITLIST hook: homepage (`index.html`) + Decatur (`decatur.html`) forms. Unchanged.
 - `46sj4zz` — dedicated SCOTTDALE INQUIRY hook: `scottdale.html` inquiry form only. Live and wired via ClawBot.
+
+
+## ClaudeBot deployment-rules sync (this drop)
+All eight HTML files now conform to the DANDY SITE — DEPLOYMENT RULES doc:
+- **Bare domain everywhere**: zero `www.hidandy.com` references remain; canonicals + og:url match the per-page map exactly (index → `https://hidandy.com/`, etc.). The `www.googletagmanager.com` / `www.facebook.com` script URLs are third-party domains and intentionally untouched.
+- **`og:logo`** added to every page immediately after `twitter:image` (or after `theme-color` on site-index, which has no OG block), pointing at `https://hidandy.com/favicon-512.png` — ⚠ deploy `favicon-512.png` (in this folder) to the repo root or that URL 404s.
+- **Head block**: site-index.html was the one page missing gtag + Meta Pixel; both added. All eight pages now carry gtag `G-7VMER7T9SN`, pixel `1101244721912216` + noscript, viewport-fit=cover, theme-color, inline favicon, apple-touch-icon.
+- **Hooks verified**: `44zimzq` on index + decatur only; `46sj4zz` on scottdale only (warning comment intact); no hooks anywhere else.
+- **Calendly verified**: walkthrough → `dandy-home-walk-thru`; drop-day → `dandydropday`.
+- **Scottdale lede** matches the required string byte-for-byte.
+- **Protected patterns untouched**: form payload field names, `mode:'no-cors'`, success-state UI, `html.js` fail-open gating, `.map-wrap > img` scoping.
+- ✅ **Rule 4 RESOLVED by Whit (July 29)**: the deployment doc's "never name Colin on Scottdale" line is superseded. Correct persona rule for `scottdale.html`:
+  **Colin = Scottdale's neighborhood handyman** (hero nametag, meet section, pricing benefit, ongoing-visit FAQ answers). **Bill = founder, does the Free Home Walkthrough** (walkthrough steps, all phone/"Call Bill" references, walkthrough FAQ answer, hero lede, meta descriptions, (404) 905-5770). The "Getting started" lede stays exactly: "No card, no commitment — just 45 minutes with Dandy to see if it fits your home." ClaudeBot should update its rules doc to match this split; never purge Colin from the handyman role, never put Colin in a walkthrough context.
