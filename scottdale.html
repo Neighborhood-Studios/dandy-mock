@@ -946,6 +946,21 @@ function inqSubmit(e){
       source:'dandy-'+HOOD.slug+'-inquiry', pageUri:location.href
     })
   }).catch(er=>console.warn('Zapier push failed:',er));
+  /* ── Secondary delivery: FormSubmit emails the lead straight to Bill.
+        Runs alongside the Zapier hook so the data lands in both places. ── */
+  fetch('https://formsubmit.co/ajax/bill@hidandy.com',{method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      _subject:'New Dandy inquiry \u2014 '+HOOD.name+' page',
+      _replyto:em.value.trim(), _template:'table', _captcha:'false',
+      name:n.value.trim(), email:em.value.trim(),
+      phone:ph.value.trim()||'(not provided)',
+      message:msg.value.trim(),
+      neighborhood:HOOD.name, source:'dandy-'+HOOD.slug+'-inquiry',
+      submitted:new Date().toLocaleString('en-US',{timeZone:'America/New_York',dateStyle:'full',timeStyle:'short'})+' ET',
+      page:location.href
+    })
+  }).catch(er=>console.warn('FormSubmit push failed:',er));
   document.getElementById('inqForm').style.display='none';
   err.style.display='none';
   document.getElementById('inqDone').classList.add('show');
