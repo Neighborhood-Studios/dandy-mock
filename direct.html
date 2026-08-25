@@ -1266,12 +1266,12 @@ function burst(el){
 /* Direct-sales page: no waitlist form, no shared-waitlist Zapier hook.
    Booking runs through /walkthrough (Calendly) and the click-to-call pill.
 
-   ── Inquiry form → the INQUIRY Zapier catch hook (46sj4zz, same one
-      scottdale.html uses; NEVER the 44zimzq waitlist hook). Payload
-      matches the scottdale contract with source/neighborhood set to
-      "direct" — add a filter or path for it in the Zap, or mint a new
-      catch hook and swap the constant below. ── */
-const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/23415577/46sj4zz/';
+   ── Inquiry form → the DEDICATED /direct Zapier catch hook (4tpaz62).
+      NOT scottdale's 46sj4zz, and NEVER the 44zimzq waitlist hook.
+      /direct has its own hook so its leads stay separate from Scottdale.
+      Payload matches the scottdale contract with source/neighborhood
+      set to "direct". ── */
+const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/23415577/4tpaz62/';
 const HOOD = { name:'Direct', slug:'direct' };
 function inqSubmit(e){
   e.preventDefault();
