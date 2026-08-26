@@ -46,7 +46,7 @@ src="https://www.facebook.com/tr?id=1101244721912216&ev=PageView&noscript=1"
 <meta name="twitter:title" content="Dandy in Scottdale — Your neighborhood's dedicated handyman">
 <meta name="twitter:description" content="One exceptional handyman for Scottdale. Book a Free Home Walkthrough with Colin.">
 <meta name="twitter:image" content="https://hidandy.com/og-image.jpg">
-<meta property="og:logo" content="https://hidandy.com/favicon-512.png">
+<meta property="og:logo" content="https://hidandy.com/apple-touch-icon.png">
 <!--
   ═══════════════════════════════════════════════════════════════════
   DANDY · SCOTTDALE PAGE   (deploy at /scottdale)
@@ -522,9 +522,17 @@ footer .grow{flex:1}
   .call-pill{padding:9px 11px;font-size:12px}
   nav .bar{gap:10px;padding:13px 14px}
 }
+.rline em{font-style:normal}
+.lshort{display:none}
+@media(max-width:430px){
+  .lfull{display:none}.lshort{display:inline}
+  .js .rline{font-size:12px;gap:6px}
+  .rnum{font-size:28px}
+}
 @media(max-width:400px){
   .receipt h2{font-size:21px!important}
   .rline{font-size:12px}
+  .rcpt{padding:22px 16px 30px}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -553,7 +561,7 @@ footer .grow{flex:1}
   <div class="wrap hero-grid">
     <div class="reveal in">
       <span class="pill"><span class="dotp"></span>Now serving Scottdale · Free Home Walkthroughs</span>
-      <h1 style="margin-top:22px">Scottdale, meet<br><span class="accent">your Dandyman.</span></h1>
+      <h1 style="margin-top:22px;font-size:clamp(34px,5vw,64px);line-height:1.04;letter-spacing:-2px"><span style="white-space:nowrap">Same handyman,</span><br><span class="accent" style="white-space:nowrap">every time.</span></h1>
       <p class="lede" style="margin-top:20px;max-width:520px">One exceptional handyman, dedicated to Scottdale’s homes — so yours gets someone who actually knows it, for <b style="color:var(--blue)">$149/month</b>. Start with a free walkthrough: meet Bill, walk the house, get set up on the app.</p>
       <div style="margin-top:30px;display:flex;gap:14px;flex-wrap:wrap">
         <a class="btn btn-pink" href="walkthrough.html">Book a Free Home Walkthrough</a>
@@ -810,10 +818,10 @@ footer .grow{flex:1}
       <div class="rcpt" id="rcpt">
         <div class="rcpt-head">ONE-OFF HANDYMAN · SCOTTDALE<br><span style="letter-spacing:.5px">— NOT A DANDY RECEIPT —</span></div>
         <div class="rline"><span>Replace shower head</span><i></i><b>$215</b></div>
-        <div class="rline"><span>Patch &amp; hang gallery wall</span><i></i><b>$260</b></div>
+        <div class="rline"><span><em class="lfull">Patch &amp; hang gallery wall</em><em class="lshort">Hang gallery wall</em></span><i></i><b>$260</b></div>
         <div class="rline"><span>Fix squeaky door</span><i></i><b>$95</b></div>
-        <div class="rline"><span>Filter swap + detector batteries</span><i></i><b>$130</b></div>
-        <div class="rline"><span>Trip &amp; service-call fees</span><i></i><b>$136</b></div>
+        <div class="rline"><span><em class="lfull">Filter swap + detector batteries</em><em class="lshort">Filter + battery swap</em></span><i></i><b>$130</b></div>
+        <div class="rline"><span><em class="lfull">Trip &amp; service-call fees</em><em class="lshort">Trip + call fees</em></span><i></i><b>$136</b></div>
         <div class="rtotal">
           <span>TOTAL</span>
           <span class="money-num-wrap"><span class="rnum" id="moneyNum">$0</span><span class="money-strike" id="moneyStrike"></span></span>
