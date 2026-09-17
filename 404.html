@@ -50,8 +50,7 @@ p{color:var(--text-2);line-height:1.5;margin-bottom:18px}
     return;
   }
   var id = match[1];
-  document.getElementById("open-app").href = "dandy://task/" + id;
-  document.getElementById("admin-link").href = "https://admin.hidandy.com/admin/tasks/" + id;
+  location.replace("/app/task.html?id=" + id);
 })();
 </script>
 </body>
