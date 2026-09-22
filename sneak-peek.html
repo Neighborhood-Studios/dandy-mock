@@ -194,8 +194,8 @@ body.is-soldout .soldout{display:block}
 document.documentElement.classList.add('js');
 
 /* ── State: 'live' | 'soldout' ── */
-let DROP_STATE = 'live';
-if (new URLSearchParams(location.search).get('state') === 'soldout') DROP_STATE = 'soldout';
+let DROP_STATE = 'soldout'; // hard-set: all 10 spots booked
+// if (new URLSearchParams(location.search).get('state') === 'soldout') DROP_STATE = 'soldout';
 function applyState(){ document.body.classList.toggle('is-soldout', DROP_STATE === 'soldout'); }
 applyState();
 
