@@ -124,9 +124,12 @@ img{display:block;max-width:100%}
 
 /* Calendly card: white, rounded, ~2/3 screen on desktop, 90vw on
    phones — Calendly's own loading spinner shows on the white surface */
-.cal-holder{width:88vw;max-width:1400px;margin:18px auto 0;position:relative;z-index:0}
+.cal-holder{width:88vw;max-width:1060px;margin:18px auto 0;position:relative;z-index:0;border-radius:20px;overflow:hidden;background:transparent;box-shadow:none}
+.cal-holder .calendly-inline-widget{margin:0;padding:0}
+.cal-holder .calendly-inline-widget{transition:height .25s ease}
+.cal-holder iframe{display:block}
 .cal-holder .calendly-inline-widget{width:100%}
-@media(max-width:900px){.cal-holder{width:95vw;margin-top:14px}}
+@media(max-width:900px){.cal-holder{align-self:flex-start;width:calc(100vw - 16px);margin-top:14px;margin-left:calc((100% - (100vw - 16px)) / 2);margin-right:0;border-radius:16px}}
 
 .live-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,248,240,.95);color:var(--blue);
   font-size:12.5px;font-weight:800;border-radius:99px;padding:8px 15px}
@@ -232,6 +235,11 @@ function burst(x, y, n){
 window.addEventListener('message', (e)=>{
   if(!e.origin.includes('calendly.com') || !e.data || typeof e.data !== 'object') return;
   const ev = e.data.event;
+  if(ev === 'calendly.page_height' && e.data.payload && e.data.payload.height){
+    const px = parseInt(e.data.payload.height, 10);
+    const w = document.querySelector('.cal-holder .calendly-inline-widget');
+    if(w && px > 300) w.style.height = px + 'px';
+  }
   if(ev === 'calendly.date_and_time_selected') burst(innerWidth/2, innerHeight*0.4, 6);
   if(ev === 'calendly.event_scheduled'){
     burst(innerWidth/2, innerHeight*0.3, 22);
