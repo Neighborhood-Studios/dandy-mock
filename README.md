@@ -13,6 +13,7 @@ GitHub Pages site for Dandy, deployed from the `main` branch root at **https://h
 | `terms-of-service.html` | `/terms-of-service` | Terms of Service |
 | `join.html` | `/join?ref=CODE` | Referral invite: the Dandy app's Refer a Friend share link lands here (`noindex`) |
 | `.well-known/apple-app-site-association` | `/.well-known/apple-app-site-association` | iOS universal links: `hidandy.com/app/*` opens the Dandy app when installed (served because of `.nojekyll`) |
+| `.well-known/assetlinks.json` | `/.well-known/assetlinks.json` | Android App Links for `com.hidandy.android` (`hidandy.com/app/*`): Play App Signing key + upload key SHA-256 (Play Console → App integrity) |
 | `site-index.html` | `/site-index` | Internal password-gated page index (`noindex`) |
 
 ## Structure
