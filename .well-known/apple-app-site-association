@@ -1,0 +1,22 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "4CD78XKV7W.com.hidandy.ios",
+        "paths": [
+          "/app/*"
+        ],
+        "appIDs": [
+          "4CD78XKV7W.com.hidandy.ios"
+        ],
+        "components": [
+          {
+            "/": "/app/*",
+            "comment": "App screens and task links (every app build maps /app/* to a screen)"
+          }
+        ]
+      }
+    ]
+  }
+}

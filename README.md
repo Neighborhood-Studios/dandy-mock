@@ -11,6 +11,8 @@ GitHub Pages site for Dandy, deployed from the `main` branch root at **https://h
 | `decatur.html` | `/decatur` | Decatur drop landing page (template for future neighborhoods) |
 | `drop-day.html` | `/drop-day` | Drop-day booking page (Calendly embed) |
 | `terms-of-service.html` | `/terms-of-service` | Terms of Service |
+| `join.html` | `/join?ref=CODE` | Referral invite: the Dandy app's Refer a Friend share link lands here (`noindex`) |
+| `.well-known/apple-app-site-association` | `/.well-known/apple-app-site-association` | iOS universal links: `hidandy.com/app/*` opens the Dandy app when installed (served because of `.nojekyll`) |
 | `site-index.html` | `/site-index` | Internal password-gated page index (`noindex`) |
 
 ## Structure
