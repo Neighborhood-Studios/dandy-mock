@@ -12,6 +12,8 @@ GitHub Pages site for Dandy, deployed from the `main` branch root at **https://h
 | `drop-day.html` | `/drop-day` | Drop-day booking page (Calendly embed) |
 | `terms-of-service.html` | `/terms-of-service` | Terms of Service |
 | `join.html` | `/join?ref=CODE` | Referral invite: the Dandy app's Refer a Friend share link lands here (`noindex`) |
+| `delete-account.html` | `/delete-account` | Account deletion: in-app steps for 7.0 and for 3.0–6.0.4, cancel-membership-first, what's deleted vs kept, and the email/text route. The deletion URL entered in Google Play (Data safety) |
+| `support.html` | `/support` | Help & support: text/email contact, quick answers (sign-in, updating, membership & billing, visits, tasks), links to Terms, Privacy and Delete account. The Support URL for both stores |
 | `.well-known/apple-app-site-association` | `/.well-known/apple-app-site-association` | iOS universal links: `hidandy.com/app/*` opens the Dandy app when installed (served because of `.nojekyll`) |
 | `.well-known/assetlinks.json` | `/.well-known/assetlinks.json` | Android App Links for `com.hidandy.android` (`hidandy.com/app/*`): Play App Signing key + upload key SHA-256 (Play Console → App integrity) |
 | `site-index.html` | `/site-index` | Internal password-gated page index (`noindex`) |
