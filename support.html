@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#003953">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VMER7T9SN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7VMER7T9SN');
+</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1101244721912216');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1101244721912216&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="canonical" href="https://hidandy.com/support">
+<meta name="description" content="Get help with the Dandy app: text or email our team, and find quick answers about signing in, updating the app, your membership and billing, booking visits, tasks and deleting your account.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Dandy">
+<meta property="og:url" content="https://hidandy.com/support">
+<meta property="og:title" content="Dandy help &amp; support">
+<meta property="og:description" content="Text or email our team, or find quick answers about the Dandy app, your membership and your visits.">
+<meta property="og:image" content="https://hidandy.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dandy — Same handyman, every time. One dedicated neighborhood handyman on subscription.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dandy help &amp; support">
+<meta name="twitter:description" content="Text or email our team, or find quick answers about the Dandy app, your membership and your visits.">
+<meta name="twitter:image" content="https://hidandy.com/og-image.jpg">
+<title>Help &amp; support · Dandy</title>
+<!--
+  DANDY · SUPPORT  (deploy at /support)
+  The Support URL for App Store Connect and Google Play. Contact: the app's Contact Us text line
+  (apps/mobile/src/constants.ts GET_HELP_PHONE_NUMBER, +14045000201) and bill@hidandy.com. No hours are published
+  anywhere on the site, so none are promised here. The help topics name each screen as the 7.0 app labels it, then the
+  pre-7.0 label (3.0 … 6.0.4 share one layout: Home / To-do's / Profile tabs). Keep them in step with the app.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#003953; --blue-2:#074D6F; --blue-deep:#00293C;
+  --pink:#F9ABAC; --pink-light:#FDDEDE; --tan:#EFE8DF; --cream:#FFF8F0;
+  --text-2:#3D5766; --text-3:#7A8E99; --hair:rgba(0,57,83,.12);
+  --shadow:0 18px 50px rgba(0,41,60,.12); --shadow-sm:0 6px 22px rgba(0,41,60,.08);
+  --r:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--blue);
+  -webkit-font-smoothing:antialiased;line-height:1.6}
+.accent{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;letter-spacing:-.5px}
+a{color:var(--blue-2)}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--pink);outline-offset:2px;border-radius:6px}
+b,strong{color:var(--blue)}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,248,240,.92);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+nav .row{max-width:1120px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:14px}
+nav img{height:30px;width:auto;display:block}
+nav .grow{flex:1}
+nav a.back{font-size:13.5px;font-weight:700;color:var(--blue);text-decoration:none;background:#fff;
+  border:1px solid var(--hair);border-radius:99px;padding:9px 18px;box-shadow:var(--shadow-sm);white-space:nowrap}
+
+/* ── HEADER ── */
+header{padding:64px 16px 34px;text-align:center}
+header .eyebrow{font-size:12px;font-weight:800;letter-spacing:2.4px;color:var(--text-3);text-transform:uppercase}
+header h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-1.5px;line-height:1.05;margin-top:12px}
+header .lede{margin:14px auto 0;max-width:560px;font-size:16px;color:var(--text-2)}
+header .spark{color:var(--pink)}
+
+main{padding:0 16px 90px}
+.wrap{max-width:820px;margin:0 auto}
+
+/* ── CONTACT CARDS ── */
+.contact{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.contact{grid-template-columns:1fr}}
+.ccard{background:#fff;border:1px solid var(--hair);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:22px 20px;
+  display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--blue);transition:transform .2s,box-shadow .2s}
+a.ccard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+a.ccard:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.ccard .k{font-size:11.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--text-3)}
+.ccard .v{font-size:19px;font-weight:800;letter-spacing:-.3px;word-break:break-word}
+.ccard .d{font-size:13.5px;color:var(--text-2);line-height:1.55}
+.ccard.blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.ccard.blue .k{color:rgba(255,255,255,.6)}
+.ccard.blue .d{color:rgba(255,255,255,.8)}
+.note{margin-top:14px;font-size:13.5px;color:var(--text-3);text-align:center}
+
+/* ── TOPICS ── */
+.doc{background:#fff;border:1px solid var(--hair);border-radius:var(--r);box-shadow:var(--shadow);
+  padding:clamp(22px,4.5vw,44px);margin-top:28px}
+.doc > h2{font-size:22px;font-weight:900;letter-spacing:-.5px}
+.doc > p.sub{font-size:14.5px;color:var(--text-2);margin-top:6px}
+details{border-top:1px solid var(--hair);scroll-margin-top:80px}
+details:first-of-type{margin-top:18px}
+details:last-of-type{border-bottom:1px solid var(--hair)}
+summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:18px 2px;font-size:16.5px;
+  font-weight:800;letter-spacing:-.2px;min-height:48px}
+summary::-webkit-details-marker{display:none}
+summary .no{flex:none;width:26px;font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:600;color:var(--pink);
+  font-size:18px}
+summary .pm{margin-left:auto;font-size:20px;font-weight:600;color:var(--text-3);transition:transform .2s}
+details[open] summary .pm{transform:rotate(45deg)}
+.ans{padding:0 2px 20px 38px}
+.ans p{font-size:15px;color:var(--text-2);margin-top:10px}
+.ans p:first-child{margin-top:0}
+.ans ul{margin:8px 0 0}
+.ans li{list-style:none;font-size:15px;color:var(--text-2);padding:4px 0 4px 22px;position:relative}
+.ans li::before{content:"✦";position:absolute;left:0;top:5px;font-size:10px;color:var(--pink)}
+.ans .older{font-size:13.5px;color:var(--text-3);margin-top:10px}
+@media(max-width:520px){.ans{padding-left:2px}}
+
+/* ── LEGAL LINKS ── */
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+@media(max-width:760px){.links{grid-template-columns:1fr}}
+.links a{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:16px 18px;text-decoration:none;
+  color:var(--blue);font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;min-height:48px}
+.links a span{margin-left:auto;color:var(--text-3)}
+.links a:hover{border-color:var(--pink)}
+
+/* ── FOOTER ── */
+footer{background:var(--blue-deep);color:rgba(255,255,255,.65);padding:34px 16px;font-size:13.5px}
+footer .frow{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+footer img{height:26px;width:auto;display:block}
+footer .grow{flex:1}
+footer a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600;margin-left:18px}
+footer a:hover{color:#fff}
+@media(max-width:640px){footer .frow{gap:10px}footer a{margin-left:0;margin-right:14px}footer .grow{flex-basis:100%;height:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="row">
+    <a href="/"><img src="/assets/img-f07d614291.svg" alt="Dandy" width="79" height="30"></a>
+    <div class="grow"></div>
+    <a class="back" href="/">← Back to Dandy</a>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">Help &amp; support</div>
+  <h1>How can we <span class="accent">help?</span> <span class="spark">✦</span></h1>
+  <p class="lede">Questions about your home, your visits or the Dandy app? Reach a real person on our Atlanta team,
+  or find a quick answer below.</p>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="contact" aria-label="Contact us">
+      <a class="ccard blue" href="sms:+14045000201">
+        <span class="k">Text us</span>
+        <span class="v">(404) 500-0201</span>
+        <span class="d">The quickest way to reach us. It's the same number the app's Contact Us button texts.</span>
+      </a>
+      <a class="ccard" href="mailto:bill@hidandy.com">
+        <span class="k">Email</span>
+        <span class="v">bill@hidandy.com</span>
+        <span class="d">For anything that needs more detail, like a billing question or a data request.</span>
+      </a>
+      <div class="ccard">
+        <span class="k">In the app</span>
+        <span class="v">Contact Us</span>
+        <span class="d">Tap your photo and name at the top left, then <b>Contact Us</b> to start a text to our
+        team.</span>
+      </div>
+    </section>
+    <p class="note">We reply as soon as we can. Please include the name or email on your Dandy account so we can find
+    it quickly.</p>
+
+    <section class="doc" aria-labelledby="topics">
+      <h2 id="topics">Quick answers</h2>
+      <p class="sub">Steps are for the current Dandy app (version 7.0 and later). If your app has a <b>Profile</b>
+      tab at the bottom, you have an earlier version: look for the "Earlier versions" note.</p>
+
+      <details id="sign-in">
+        <summary><span class="no" aria-hidden="true">1.</span>Signing in<span class="pm" aria-hidden="true">+</span></summary>
+        <div class="ans">
+          <p>Sign in with the email and password you joined with. If you joined with <b>Continue with Apple</b> or
+          <b>Continue with Google</b>, use the same button again.</p>
+          <ul>
+            <li><b>Forgot your password?</b> Enter your email, tap <b>Continue</b>, then <b>Forgot Password?</b> We'll
+            email you a link to set a new one. Check your spam folder if it doesn't arrive in a few minutes.</li>
+            <li><b>Seeing "Account deactivated"?</b> Text or email us and we'll sort it out.</li>
+          </ul>
+          <p class="older">Earlier versions: tap <b>Forgot Password?</b> on the log-in screen.</p>
+        </div>
+      </details>
+
+      <details id="update">
+        <summary><span class="no" aria-hidden="true">2.</span>Updating the app<span class="pm" aria-hidden="true">+</span></summary>
+        <div class="ans">
+          <p>Get the latest version of Dandy from the
+          <a href="https://apps.apple.com/us/app/dandy-handyman/id6747405514">App Store</a> (iPhone) or
+          <a href="https://play.google.com/store/apps/details?id=com.hidandy.android">Google Play</a> (Android). Open
+          the listing and tap <b>Update</b> if you see it. Turning on automatic updates in your phone's store settings
+          keeps you current.</p>
+          <p>If the steps on this page don't match what you see, updating usually fixes that.</p>
+        </div>
+      </details>
+
+      <details id="membership">
+        <summary><span class="no" aria-hidden="true">3.</span>Membership &amp; billing<span class="pm" aria-hidden="true">+</span></summary>
+        <div class="ans">
+          <p>Tap your photo and name at the top left, then:</p>
+          <ul>
+            <li><b>Membership</b>: see your plan, change plan, pause, resume or cancel, and manage your cards on the
+            <b>Payment Methods</b> tab.</li>
+            <li><b>Invoices</b>: your membership invoices and any parts and supplies.</li>
+          </ul>
+          <p>When you cancel, your membership stays active until the end of the period you've already paid for.
+          Questions about a charge? Email or text us.</p>
+          <p class="older">Earlier versions: Profile tab → <b>Your Dandy Membership</b> for your plan, and
+          <b>Billing</b> for invoices and payment methods.</p>
+        </div>
+      </details>
+
+      <details id="visits">
+        <summary><span class="no" aria-hidden="true">4.</span>Booking visits<span class="pm" aria-hidden="true">+</span></summary>
+        <div class="ans">
+          <p>Open the <b>Visits</b> tab and tap <b>Book a visit</b>, pick a day and time, and confirm. Already booked?
+          The same button reads <b>Reschedule upcoming visit</b> so you can move it. Booking needs an active
+          membership.</p>
+          <p>Need something small that can't wait for your next visit? Text us and we'll see what we can do.</p>
+          <p class="older">Earlier versions: tap <b>Book Visit</b> on the Home tab.</p>
+        </div>
+      </details>
+
+      <details id="tasks">
+        <summary><span class="no" aria-hidden="true">5.</span>Tasks<span class="pm" aria-hidden="true">+</span></summary>
+        <div class="ans">
+          <p>Your task list is how your Dandyman knows what your home needs. On the <b>Tasks</b> tab:</p>
+          <ul>
+            <li><b>Add a task</b> to describe something that needs doing. A photo or short video helps us bring the
+            right parts.</li>
+            <li><b>Explore tasks</b> to browse common jobs and add them to your list.</li>
+          </ul>
+          <p class="older">Earlier versions: use the <b>To-do's</b> tab.</p>
+        </div>
+      </details>
+
+      <details id="account">
+        <summary><span class="no" aria-hidden="true">6.</span>Your account &amp; data<span class="pm" aria-hidden="true">+</span></summary>
+        <div class="ans">
+          <p>Update your details under your photo and name → <b>User Profile</b> and <b>Home Profile</b>.</p>
+          <p>Want to leave? You can delete your account in the app, or ask us by email. See
+          <a href="/delete-account">Delete your account</a> for the steps, what's removed and what we keep.</p>
+        </div>
+      </details>
+    </section>
+
+    <div class="links" role="navigation" aria-label="Policies">
+      <a href="/terms-of-service.html">Terms of Service <span aria-hidden="true">→</span></a>
+      <a href="/privacy-policy">Privacy Policy <span aria-hidden="true">→</span></a>
+      <a href="/delete-account">Delete your account <span aria-hidden="true">→</span></a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="frow">
+    <img src="/assets/img-43da3377ce.svg" alt="Dandy" width="69" height="26">
+    <span>Your neighborhood handyman, on subscription.</span>
+    <div class="grow"></div>
+    <a href="/">Home</a>
+    <a href="/delete-account">Delete account</a>
+    <a href="/privacy-policy">Privacy</a>
+    <a href="/terms-of-service.html">Terms</a>
+  </div>
+</footer>
+
+<script>
+// Open the topic a link points at (e.g. /support#membership), and keep it open when the hash changes.
+(function () {
+  function openFromHash() {
+    var id = decodeURIComponent((location.hash || "").slice(1));
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (el && el.tagName === "DETAILS") { el.open = true; el.scrollIntoView(); }
+  }
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
+})();
+</script>
+</body>
+</html>
