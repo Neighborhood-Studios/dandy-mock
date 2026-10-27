@@ -49,6 +49,7 @@ src="https://www.facebook.com/tr?id=1101244721912216&ev=PageView&noscript=1"
 <meta name="twitter:title" content="Delete your Dandy account">
 <meta name="twitter:description" content="Delete your account in the Dandy app or by email, and see exactly what's removed and what's kept.">
 <meta name="twitter:image" content="https://hidandy.com/og-image.jpg">
+<meta property="og:logo" content="https://hidandy.com/apple-touch-icon.png">
 <title>Delete your account · Dandy</title>
 <!--
   DANDY · ACCOUNT DELETION  (deploy at /delete-account)
@@ -65,7 +66,9 @@ src="https://www.facebook.com/tr?id=1101244721912216&ev=PageView&noscript=1"
     - an old build with a membership still billing is only deactivated (handler.ts deactivateOnly), hence the
       "finish by email" note in the earlier-versions section
   Phone = apps/mobile/src/constants.ts GET_HELP_PHONE_NUMBER (the app's Contact Us text line).
-  Email response time matches privacy-policy.html §11 (30 days).
+  Email response time matches privacy-policy.html §11 ("we'll respond within 30 days"): don't promise more here.
+  Leave sign-up: apps/mobile/src/screens/OnboardingScreen.tsx LEAVE_STEPS (Name's "Not you?", then Welcome through
+  Choose Payment). Handy chats = public.chat_messages (5.0.5-6.0.4's "Ask Handy"), deleted by the anonymise migration.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -206,7 +209,8 @@ footer a:hover{color:#fff}
       <li>You'll see <b>Account deleted</b> and you're signed out. That's it: there's nothing else to do.</li>
     </ol>
     <p class="small">Started signing up but didn't finish? Tap <b>Not you?</b> on "What's your name?", or
-    <b>Leave sign-up</b> at the top right of any later step, then choose <b>Delete login</b>.</p>
+    <b>Leave sign-up</b> at the top right of the steps from "Welcome" to "Choose a payment method", then choose
+    <b>Delete login</b>.</p>
 
     <h2 id="earlier-versions"><span class="no">2.</span>In earlier versions of the app</h2>
     <p>If your app has a <b>Profile</b> tab at the bottom of the screen, you have a version from before 7.0:</p>
@@ -253,12 +257,13 @@ footer a:hover{color:#fff}
       <li><b>Open tasks</b> that haven't been done yet are closed, so nobody works on them.</li>
       <li><b>The photos and videos you uploaded</b>: task photos and videos, walkthrough videos (and their
       transcripts) and your profile photo.</li>
-      <li><b>Your in-app messages and notifications.</b></li>
+      <li><b>Your in-app notifications</b>, and your chats with Handy, the in-app assistant in some earlier
+      versions.</li>
     </ul>
     <div class="callout">
       <span class="title">Sharing a home with someone who has their own Dandy login?</span>
       Then the home stays open for them, with its visits, tasks, household members and photos. Deleting your account
-      removes your own name, contact details, profile photo, sign-in, messages and notifications.
+      removes your own name, contact details, profile photo, sign-in, notifications and Handy chats.
     </div>
     <p class="small">Signed in with Apple? You can also remove Dandy from the Sign in with Apple list in your iPhone's
     Settings (tap your name at the top, then look for Sign in with Apple).</p>
@@ -297,7 +302,7 @@ footer a:hover{color:#fff}
     <ul>
       <li>If you still have a membership, we'll cancel it as part of the same request.</li>
       <li>We delete and keep exactly what's listed above.</li>
-      <li>We'll complete your request <b>within 30 days, usually much sooner</b>, and email you when it's done.</li>
+      <li>We'll respond <b>within 30 days, usually much sooner</b>, and email you when it's done.</li>
     </ul>
     <a class="btn btn-primary" href="mailto:bill@hidandy.com?subject=Delete%20my%20Dandy%20account">Email bill@hidandy.com</a>
     <a class="btn btn-secondary" href="sms:+14045000201">Text (404) 500-0201</a>
