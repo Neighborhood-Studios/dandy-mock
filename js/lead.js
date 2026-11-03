@@ -30,6 +30,9 @@
     hubspotFormGuid: { default: '951087de-5bac-40ba-ae22-d4fb5bd07ab5', v1: '', v2: '', v3: '' },
     // HubSpot property name for the free-text field (v2 sends the to-do list here).
     messageField: 'message',
+    // Custom contact property (single-line text), added to the form as a hidden
+    // field, so the Submissions table shows which page the lead came from ("/v1").
+    landingPageField: 'landing_page',
     // Already initialised in each page's <head>. Set here too for advanced matching.
     metaPixelId: '1101244721912216',
     // Load HubSpot's tracking code. It sets the `hubspotutk` cookie, which ties the
@@ -137,6 +140,9 @@
       { objectTypeId: '0-1', name: 'phone', value: lead.phone }
     ];
     if (n.last) fields.push({ objectTypeId: '0-1', name: 'lastname', value: n.last });
+    if (CONFIG.landingPageField) {
+      fields.push({ objectTypeId: '0-1', name: CONFIG.landingPageField, value: '/' + lead.page });
+    }
     if (lead.message && CONFIG.messageField) {
       fields.push({ objectTypeId: '0-1', name: CONFIG.messageField, value: lead.message });
     }
