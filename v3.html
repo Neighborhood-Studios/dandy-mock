@@ -129,7 +129,7 @@ form{display:grid;gap:9px;margin-top:14px}
 <div class="eyebrow">Free home walk-thru</div>
 <h2>Get your free home walk-thru</h2>
 <p class="sub">45 minutes with Bill, Dandy's founder. No card, no commitment.</p>
-<form id="leadForm" onsubmit="return leadSubmit(event)" novalidate>
+<form id="leadForm" onsubmit="return leadSubmit(event)" novalidate data-dandy-lead data-hs-do-not-collect="true">
 <input class="fld" name="name" type="text" autocomplete="name" placeholder="Your name" required>
 <div class="two"><input class="fld" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Phone" required><input class="fld" name="email" type="email" autocomplete="email" inputmode="email" placeholder="Email" required></div>
 <button class="btn btn-pink" type="submit">Book my free walk-thru <span>✦</span></button>
@@ -152,21 +152,20 @@ form{display:grid;gap:9px;margin-top:14px}
 </footer>
 </div>
 
+<script src="/js/lead.js"></script>
 <script>
-/* ── Lead form → Zapier. PENDING: Website (pt 2b) needs its OWN Zapier catch hook.
-   NEVER use 44zimzq (homepage waitlist) or another page's hook here. ── */
-const ZAPIER_WEBHOOK='';
+/* ── Lead form → HubSpot + Meta Pixel via /js/lead.js (portal ID / form GUID live there). ── */
 const PAGE={slug:'v3',name:'Website (pt 2b) · /v3'};
 const $=id=>document.getElementById(id);
-function leadSubmit(e){e.preventDefault();const f=e.target,n=f.querySelector('[name=name]'),ph=f.querySelector('[name=phone]'),em=f.querySelector('[name=email]'),err=f.querySelector('.f-err');
+function leadSubmit(e){e.preventDefault();const f=e.target,btn=f.querySelector('[type=submit]');if(btn.disabled)return false;const n=f.querySelector('[name=name]'),ph=f.querySelector('[name=phone]'),em=f.querySelector('[name=email]'),err=f.querySelector('.f-err');
 [n,ph,em].forEach(x=>x.classList.remove('err'));err.textContent='';
 if(!n.value.trim()){n.classList.add('err');err.textContent='Mind adding your name?';n.focus();return false}
 if(ph.value.replace(/\D/g,'').length<10){ph.classList.add('err');err.textContent='Add a phone number so Bill can text you.';ph.focus();return false}
 if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim())){em.classList.add('err');err.textContent='That email doesn\u2019t look right \u2014 mind checking it?';em.focus();return false}
-const payload={name:n.value.trim(),email:em.value.trim(),phone:ph.value.trim(),message:'',formType:'inquiry',neighborhood:PAGE.slug,dateSubmitted:new Date().toISOString(),source:'dandy-'+PAGE.slug+'-lead',pageUri:location.href};
-if(ZAPIER_WEBHOOK)fetch(ZAPIER_WEBHOOK,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)}).catch(er=>console.warn('Zapier push failed:',er));else console.warn('ZAPIER_WEBHOOK not set for '+PAGE.slug,payload);
-try{fbq('track','Lead',{content_name:PAGE.slug})}catch(x){}try{gtag('event','generate_lead',{page:PAGE.slug})}catch(x){}
-$('card').dataset.face='done';setTimeout(()=>burst($('check')),380);return false}
+if(!window.DandyLead){err.textContent='Hmm, that didn\u2019t go through. Mind trying again?';return false}
+btn.disabled=true;const lbl=btn.innerHTML;btn.textContent='Sending\u2026';
+DandyLead.submit(f,{page:PAGE.slug,name:n.value.trim(),email:em.value.trim(),phone:ph.value.trim()}).then(r=>{btn.disabled=false;btn.innerHTML=lbl;if(!r.ok){err.textContent=r.error;return}
+$('card').dataset.face='done';setTimeout(()=>burst($('check')),380)});return false}
 function burst(el){if(!el)return;const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;for(let i=0;i<18;i++){const s=document.createElement('span');s.className='burst-p';s.textContent=i%3?'\u2726':'\u2713';const a=Math.random()*Math.PI*2,d=70+Math.random()*120;s.style.cssText='left:'+cx+'px;top:'+cy+'px;color:'+(i%2?'#F9ABAC':'#fff')+';font-size:'+(10+Math.random()*16)+'px;--dx:'+Math.cos(a)*d+'px;--dy:'+Math.sin(a)*d+'px;--s:'+(0.6+Math.random())+';--r:'+(Math.random()*360)+'deg';document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}}
 const DONE=['Faucet swapped','Filters changed','TV mounted','Gallery wall hung','Door re-hung','Fan steadied','Shower re-caulked','Detector quieted','Drywall patched','Toilet fixed','Towel bar tightened','Bookshelf assembled'];
 $('mq').innerHTML=DONE.concat(DONE).map(t=>'<span><b>\u2713</b>'+t+'</span>').join('');
